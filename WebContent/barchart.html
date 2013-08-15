@@ -1,0 +1,426 @@
+
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Charts</title>
+
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script src="js/highcharts.js"></script>
+		<script src="js/exporting.js"></script>
+		<script type="text/javascript">
+		var unique={"data":[{"city":"Beijing","value":11},{"city":"Shanghai","value":9},{"city":"Tianjing","value":9},{"city":"Wuhan","value":8},{"city":"Chengdu","value":7},{"city":"Guangzhou","value":7},{"city":"Taiyuan","value":5},{"city":"Gansu","value":4},{"city":"Ningzhau","value":4},{"city":"Chongqing","value":2}]};
+		var uniquecity=[];
+		var uniquevalue=[];
+	for (var i=0;i<unique.data.length;i++)
+	{
+		uniquecity[i]=unique.data[i].city;
+		uniquevalue[i]=unique.data[i].value;
+	}
+$(function () {
+	$('#UniqueScanCount').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Unique Scan Count',
+                	style: {
+                		fontWeight: 'bold',
+                		fontSize: '22px'
+                	}
+            },
+           /* subtitle: {
+                text: 'subtitle here'
+            },
+            */
+            xAxis: {
+            
+                categories: uniquecity,
+                title: {
+                    text: null
+                },
+                labels: {
+                	style: {
+                		fontSize: '12px'
+                	}
+                },
+               
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify',
+                    style: {
+                		fontSize: '12px'
+                	}
+                }
+            },
+            tooltip: {
+                valueSuffix: ' scans'
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            legend: {
+                layout: 'horizontal',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: '#FFFFFF',
+                shadow: true,
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'Unique Scans: ',
+                data: uniquevalue,
+                color: '#FFA831'
+            }]
+        });
+});
+
+
+
+/*
+$(function () {
+    $('#TotalScanCount').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Total Scan Count',
+            	style: {
+            		fontWeight: 'bold',
+            		fontSize: '22px'
+            	}
+        },
+        xAxis: {
+        
+			categories: ['Chengdu', 'Beijing', 'Shanghai', 'Wuhan', 'Tianjing', 'Guangzhou', 'Gansu', 'Taiyuan', 'Ningzhou', 'Chongqing'],
+        	title: {
+                text: null
+            },
+            labels: {
+            	style: {
+            		fontSize: '12px'
+            	}
+            },
+           
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify',
+                style: {
+            		fontSize: '12px'
+            	}
+            }
+        },
+        tooltip: {
+            valueSuffix: ' scans'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'horizontal',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 100,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: '#FFFFFF',
+            shadow: true,
+            enabled: false
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Total Scans: ',
+            data: [27,24,18,17,13,10,6,4,3,2],
+            color: '#FFA831'
+        }]
+    });
+});
+    
+$(function () {
+    $('#InvalidScanCount').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Invalid Scan Count',
+            	style: {
+            		fontWeight: 'bold',
+            		fontSize: '22px'
+            	}
+        },
+        xAxis: {
+        
+			categories: ['Chongqing', 'Shanghai', 'Chengdu', 'Wuhan', 'Ningzhou', 'Taiyuan', 'Gansu', 'Beijing', 'Tianjing', 'Guangzhou'],
+        	title: {
+                text: null
+            },
+            labels: {
+            	style: {
+            		fontSize: '12px'
+            	}
+            },
+           
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify',
+                style: {
+            		fontSize: '12px'
+            	}
+            }
+        },
+        tooltip: {
+            valueSuffix: ' scans'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'horizontal',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 100,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: '#FFFFFF',
+            shadow: true,
+            enabled: false
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Invalid Scans: ',
+            data: [10,8,6,6,6,5,3,2,2,1],
+            color: '#FFA831'
+        }]
+    });
+});
+
+$(function () {
+    $('#SuccessFailedRatio').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Success/Failed Ratio',
+            	style: {
+            		fontWeight: 'bold',
+            		fontSize: '22px'
+            	}
+        },
+        xAxis: {
+        
+			categories: ['Chongqing', 'Shanghai', 'Chengdu', 'Wuhan', 'Ningzhou', 'Taiyuan', 'Gansu', 'Beijing', 'Tianjing', 'Guangzhou'],
+        	title: {
+                text: null
+            },
+            labels: {
+            	style: {
+            		fontSize: '12px'
+            	}
+            },
+           
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify',
+                style: {
+            		fontSize: '12px'
+            	}
+            }
+        },
+        tooltip: {
+        	 pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+             shared: true,
+            valueSuffix: ' scans'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'horizontal',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 100,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: '#FFFFFF',
+            shadow: true,
+            enabled: false
+        },
+        credits: {
+            enabled: false
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+            series: [{
+            name: 'success',
+            data: [27,24,18,17,13,10,6,4,3,2],
+            color: 'green'
+        }, {
+            name: 'failed',
+            data: [10,8,6,6,6,5,3,2,2,1],
+            color: 'red'
+        }]
+    });
+});
+
+$(function () {
+    $('#SuccessFailedCountTime').highcharts({
+        title: {
+            text: 'Success and Failed Scan Count',
+            style: {
+        		fontWeight: 'bold',
+        		fontSize: '22px'
+        	}
+            
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+        yAxis: {
+        	title: {
+                text: '',
+                align: 'high'
+        	}
+        },
+        tooltip: {
+            valueSuffix: ' scans'
+        },
+        credits: {
+        	enabled: false
+        },
+        legend: {
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'bottom',
+            borderWidth: 0,
+            floating: false
+        },
+        series: [{
+            name: 'Success',
+            data: [4,2,3,5,6,8,5,9,7,8,10,11],
+            color: 'green'
+        }, {
+            name: 'Failed',
+            data: [2,4,2,3,2,3,1,2,4,5,3,2],
+            color: 'red'
+        }]
+    });
+});
+
+$(function () {
+    $('#UniqueAndTotalScan').highcharts({
+        title: {
+            text: 'Unique and Total Scan',
+            style: {
+        		fontWeight: 'bold',
+        		fontSize: '22px'
+        	}
+            
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+        yAxis: {
+        	title: {
+                text: '',
+                align: 'high'
+        	}
+        },
+        tooltip: {
+            valueSuffix: ' scans'
+        },
+        credits: {
+        	enabled: false
+        },
+        legend: {
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'bottom',
+            borderWidth: 0,
+            floating: false
+        },
+        series: [{
+            name: 'Unique',
+            data: [5,3,4,5,6,7,6,7,6,7,8,9],
+            
+        }, {
+            name: 'Total',
+            data: [5,7,5,5,12,26,16,12,11,12,20,22],
+           
+        }]
+    });
+});
+*/
+		</script>
+	</head>
+	<body>
+
+<div id="UniqueScanCount"></div>
+<!-- 
+<div id="TotalScanCount" style="width: 600px; height: 500px;"></div>
+<div id="InvalidScanCount" style="width: 600px; height: 500px;"></div>
+<div id="SuccessFailedRatio" style="width: 600px; height: 500px;"></div>
+<div id="SuccessFailedCountTime" style="width: 600px; height: 500px;"></div>
+<div id="UniqueAndTotalScan" style="width: 600px; height: 500px;"></div>
+-->
+
+	</body>
+</html>

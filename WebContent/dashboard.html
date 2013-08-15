@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<title>GenuineAce Dashboard</title>
+	<link rel="stylesheet" media="screen" href="css/bootstrap.css" type="text/css">
+	<link rel="stylesheet" media="screen" href="css/font-awesome.css" type="text/css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	<script src="js/highcharts.js"></script>
+	<script src="js/exporting.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/tab.js"></script>
+	<script src="js/dropdown.js"></script>
+	<script src="js/tooltip.js"></script>
+	<script src="js/popover.js"></script>
+	<script src="js/fileUpload.js"></script>
+	
+	<script>
+	var string={"unique":[{"city":"Beijing","value":11},{"city":"Shanghai","value":9},{"city":"Tianjing","value":9},{"city":"Wuhan","value":8},{"city":"Chengdu","value":7},{"city":"Guangzhou","value":7},{"city":"Taiyuan","value":5},{"city":"Gansu","value":4},{"city":"Ningzhau","value":4},{"city":"Chongqing","value":2}],
+			"total":[{"city":"Wuhan","value":27},{"city":"Tianjing","value":24},{"city":"Taiyuan","value":17},{"city":"Beijing","value":16},{"city":"Shanghai","value":16},{"city":"Guangzhou","value":12},{"city":"Chengdu","value":10},{"city":"Gansu","value":9},{"city":"Ningzhau","value":5},{"city":"Chongqing","value":2}],
+			"invalid":[{"city":"Wuhan","value":10},{"city":"Tianjing","value":8},{"city":"Taiyuan","value":8},{"city":"Beijing","value":7},{"city":"Shanghai","value":6},{"city":"Guangzhou","value":4},{"city":"Chengdu","value":4},{"city":"Gansu","value":3},{"city":"Ningzhau","value":3},{"city":"Chongqing","value":2}],
+			"sfratio":[{"city":"Chongqing","success":20,"fail":10},{"city":"Beijing","success":26,"fail":2},{"city":"Taiyuan","success":18,"fail":12},{"city":"Tianjing","success":7,"fail":10},{"city":"Chengdu","success":13,"fail":2},{"city":"Guangzhou","success":7,"fail":4},{"city":"Ningzhau","success":16,"fail":3},{"city":"Gansu","success":3,"fail":10},{"city":"Shanghai","success":8,"fail":10},{"city":"Wuhan","success":12,"fail":3}],
+			"time":[{"month":"January","success":4, "fail": 2, "unique": 5, "total": 5},{"month":"February","success":2, "fail": 3, "unique": 4, "total": 10},{"month":"March","success":6, "fail": 3, "unique": 3, "total": 15},{"month":"April","success":7, "fail": 6, "unique": 2, "total": 24},{"month":"May","success":8, "fail": 2, "unique": 5, "total": 20},{"month":"June","success":10, "fail": 7, "unique": 5, "total": 18},{"month":"July","success":5, "fail": 7, "unique": 2, "total": 12},{"month":"August","success":12, "fail": 5, "unique": 3, "total": 20},{"month":"September","success":5, "fail": 4, "unique": 1, "total": 10},{"month":"October","success":3, "fail": 5, "unique": 6, "total": 11},{"month":"November","success":8, "fail": 5, "unique": 3, "total": 15},{"month":"December","success":4, "fail": 2, "unique": 5, "total": 30}],
+			"products":[{"product": "Product A", "num": 10, "total": 88, "App": 3, "WeChat": 12, "Weibo": 5, "Others": 4}, {"product": "Product B", "num": 24, "total": 33, "App": 10, "WeChat": 4, "Weibo": 2, "Others": 6}, {"product": "Product C", "num": 14, "total": 62, "App": 6, "WeChat": 3, "Weibo": 2, "Others": 1}, {"product": "Product D", "num": 11, "total": 79, "App": 11, "WeChat": 2, "Weibo": 3, "Others": 6}, {"product": "Product E", "num": 15, "total": 32, "App": 8, "WeChat": 2, "Weibo": 1, "Others": 5}, {"product": "Product F", "num": 17, "total": 74, "App": 6, "WeChat": 1, "Weibo": 5, "Others": 2}, {"product": "Product F", "num": 17, "total": 52, "App": 9, "WeChat": 2, "Weibo": 4, "Others": 2}, {"product": "Product G", "num": 20, "total": 48, "App": 8, "WeChat": 4, "Weibo": 2, "Others": 5}, {"product": "Product G", "num": 18, "total": 60, "App": 11, "WeChat": 2, "Weibo": 4, "Others":7}, {"product": "Product H", "num": 18, "total": 32, "App": 6, "WeChat": 2, "Weibo": 3, "Others": 2}],
+			"scanVSfavourite":[{}],
+			"warning":[{"error": false}]
+	};
+	//Data for UNIQUE SCAN COUNT
+	var uniquecity=[];
+	var uniquevalue=[];
+	for (var i=0;i<string.unique.length;i++)
+	{
+		uniquecity[i]=string.unique[i].city;
+		uniquevalue[i]=string.unique[i].value;
+	}
+	
+	//Data for TOTAL SCAN COUNT chart
+	var totalcity=[];
+	var totalvalue=[];
+	for (var i=0;i<string.total.length;i++)
+	{
+		totalcity[i]=string.total[i].city;
+		totalvalue[i]=string.total[i].value;
+	}
+	
+	//Data for INVALID SCAN COUNT chart
+	var invalidcity=[];
+	var invalidvalue=[];
+	for (var i=0;i<string.invalid.length;i++)
+	{
+		invalidcity[i]=string.invalid[i].city;
+		invalidvalue[i]=string.invalid[i].value;
+	}
+	
+	//Data for SUCCESS/FAILED RATIO chart
+	var sfcity=[];
+	var sfsuccess=[];
+	var sffail=[];
+	for (var i=0;i<string.sfratio.length;i++)
+	{
+		sfcity[i]=string.sfratio[i].city;
+		sfsuccess[i]=string.sfratio[i].success;
+		sffail[i]=string.sfratio[i].fail;
+	}
+	
+	//Data for all time charts
+	var months=[];
+	var timesuccess=[];
+	var timefail=[];
+	var timeunique=[];
+	var timetotal=[];
+	for (var i=0;i<string.time.length;i++)
+	{
+		months[i]=string.time[i].month.substring(0,3);
+		timesuccess[i]=string.time[i].success;
+		timefail[i]=string.time[i].fail;
+		timeunique[i]=string.time[i].unique;
+		timetotal[i]=string.time[i].total;
+	}
+	//Data for Product > Activity View charts (3)
+	var products=[];
+	var prodnum=[];
+	var prodtotal=[];
+	var prodapp=[];
+	var prodwechat=[];
+	var prodweibo=[];
+	var prodother=[];
+	for (var i=0;i<string.products.length;i++)
+	{
+		products[i]=string.products[i].product;
+		prodnum[i]=string.products[i].num;
+		prodtotal[i]=string.products[i].total;
+		prodapp[i]=string.products[i].App;
+		prodwechat[i]=string.products[i].WeChat;
+		prodweibo[i]=string.products[i].Weibo;
+		prodother[i]=string.products[i].Others;
+	}
+	
+	
+	$(function () {
+        $('#UniqueScanCount').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Unique Scan Count',
+                	style: {
+                		fontWeight: 'bold',
+                		fontSize: '22px'
+                	}
+            },
+           /* subtitle: {
+                text: 'subtitle here'
+            },
+            */
+            xAxis: {
+            
+                categories: uniquecity,
+                title: {
+                    text: null
+                },
+                labels: {
+                	rotation: -45,
+                	style: {
+                		fontSize: '12px'
+                	}
+                },
+               
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: '',
+                    align: 'high'
+                },
+                labels: {
+                    overflow: 'justify',
+                    style: {
+                		fontSize: '12px'
+                	}
+                }
+            },
+            tooltip: {
+                valueSuffix: ' scans'
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            legend: {
+                layout: 'horizontal',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -40,
+                y: 100,
+                floating: true,
+                borderWidth: 1,
+                backgroundColor: '#FFFFFF',
+                shadow: true,
+                enabled: false
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                name: 'Unique Scans: ',
+                data: uniquevalue,
+                color: '#FFA831'
+            }]
+        });
+    });
+    
+$(function () {
+    $('#TotalScanCount').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Total Scan Count',
+            	style: {
+            		fontWeight: 'bold',
+            		fontSize: '22px'
+            	}
+        },
+        xAxis: {
+        
+			categories: totalcity,
+        	title: {
+                text: null
+            },
+            labels: {
+            	rotation: -45,
+            	style: {
+            		fontSize: '12px'
+            	}
+            },
+           
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify',
+                style: {
+            		fontSize: '12px'
+            	}
+            }
+        },
+        tooltip: {
+            valueSuffix: ' scans'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'horizontal',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 100,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: '#FFFFFF',
+            shadow: true,
+            enabled: false
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Total Scans: ',
+            data: totalvalue,
+            color: 'purple'
+        }]
+    });
+});
+    
+$(function () {
+    $('#InvalidScanCount').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Invalid Scan Count',
+            	style: {
+            		fontWeight: 'bold',
+            		fontSize: '22px'
+            	}
+        },
+        xAxis: {
+        
+			categories: invalidcity,
+        	title: {
+                text: null
+            },
+            labels: {
+            	rotation: -45,
+            	style: {
+            		fontSize: '12px'
+            	}
+            },
+           
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify',
+                style: {
+            		fontSize: '12px'
+            	}
+            }
+        },
+        tooltip: {
+            valueSuffix: ' scans'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'horizontal',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 100,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: '#FFFFFF',
+            shadow: true,
+            enabled: false
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Invalid Scans: ',
+            data: invalidvalue,
+            color: 'blue'
+        }]
+    });
+});
+$(function () {
+var options = {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Success/Failed Ratio',
+            	style: {
+            		fontWeight: 'bold',
+            		fontSize: '22px'
+            	}
+        },
+        xAxis: {
+        
+			categories: sfcity,
+        	title: {
+                text: null
+            },
+            labels: {
+            	rotation: -45,
+            	style: {
+            		fontSize: '12px'
+            	}
+            },
+           
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '%',
+                align: 'high',
+                rotation: '0'
+            },
+            labels: {
+                overflow: 'justify',
+                style: {
+            		fontSize: '12px'
+            	}
+            }
+        },
+        tooltip: {
+        	 pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+             shared: true,
+            valueSuffix: ' scans'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'horizontal',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 100,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: '#FFFFFF',
+            shadow: true,
+            enabled: false
+        },
+        credits: {
+            enabled: false
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+            series: [{
+            name: 'Success',
+            data: sfsuccess,
+            color: 'green'
+        }, {
+            name: 'Failed',
+            data: sffail,
+            color: 'red'
+        }]
+    };
+$('#SuccessFailedRatio').highcharts(options);
+$('#CounterfeitRatio').highcharts(options);
+});
+
+$(function () {
+    $('#SuccessFailedCountTime').highcharts({
+        title: {
+            text: 'Success and Failed Scan Count',
+            style: {
+        		fontWeight: 'bold',
+        		fontSize: '22px'
+        	}
+            
+        },
+        xAxis: {
+            categories: months
+        },
+        yAxis: {
+        	title: {
+                text: '',
+                align: 'high'
+        	}
+        },
+        tooltip: {
+            valueSuffix: ' scans'
+        },
+        credits: {
+        	enabled: false
+        },
+        legend: {
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'bottom',
+            borderWidth: 0,
+            floating: false
+        },
+        series: [{
+            name: 'Success',
+            data: timesuccess,
+            color: 'green'
+        }, {
+            name: 'Failed',
+            data: timefail,
+            color: 'red'
+        }]
+    });
+});
+
+$(function () {
+    $('#UniqueAndTotalScan').highcharts({
+        title: {
+            text: 'Unique and Total Scan',
+            style: {
+        		fontWeight: 'bold',
+        		fontSize: '22px'
+        	}
+            
+        },
+        xAxis: {
+            categories: months
+        },
+        yAxis: {
+        	title: {
+                text: '',
+                align: 'high'
+        	}
+        },
+        tooltip: {
+            valueSuffix: ' scans'
+        },
+        credits: {
+        	enabled: false
+        },
+        legend: {
+            layout: 'horizontal',
+            align: 'center',
+            verticalAlign: 'bottom',
+            borderWidth: 0,
+            floating: false
+        },
+        series: [{
+            name: 'Unique',
+            data: timeunique,
+            
+        }, {
+            name: 'Total',
+            data: timetotal,
+           
+        }]
+    });
+});
+
+$(function () {
+    $('#ScannedItemsOfEachProduct').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Number of Scanned Items of Each Product',
+            	style: {
+            		fontWeight: 'bold',
+            		fontSize: '22px'
+            	}
+        },
+        xAxis: {
+        
+			categories: products,
+        	title: {
+                text: null
+            },
+            labels: {
+            	rotation: -45,
+            	style: {
+            		fontSize: '12px'
+            	}
+            },
+           
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify',
+                style: {
+            		fontSize: '12px'
+            	}
+            }
+        },
+        tooltip: {
+            valueSuffix: ' scans'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'horizontal',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 100,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: '#FFFFFF',
+            shadow: true,
+            enabled: false
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: "Number: ",
+            data: prodnum,
+            color: 'orange'
+        }]
+    });
+});
+
+$(function () {
+    $('#TotalScansOfEachProduct').highcharts({
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: 'Total Scans of Each Product',
+            	style: {
+            		fontWeight: 'bold',
+            		fontSize: '22px'
+            	}
+        },
+        xAxis: {
+        
+			categories: products,
+        	title: {
+                text: null
+            },
+            labels: {
+            	rotation: -45,
+            	style: {
+            		fontSize: '12px'
+            	}
+            },
+           
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: '',
+                align: 'high'
+            },
+            labels: {
+                overflow: 'justify',
+                style: {
+            		fontSize: '12px'
+            	}
+            }
+        },
+        tooltip: {
+            valueSuffix: ' scans'
+        },
+        plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'horizontal',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 100,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: '#FFFFFF',
+            shadow: true,
+            enabled: false
+        },
+        credits: {
+            enabled: false
+        },
+        series: [{
+            name: 'Number: ',
+            data: prodtotal,
+            color: 'darkgreen'
+        }]
+    });
+});
+
+$(function () {
+    $('#ProductReferralChannels').highcharts({
+chart: {
+    type: 'column'
+},
+title: {
+    text: 'Product Referral Channels',
+    	style: {
+    		fontWeight: 'bold',
+    		fontSize: '22px'
+    	}
+},
+xAxis: {
+
+	categories: products,
+	title: {
+        text: null
+    },
+    labels: {
+    	rotation: -45,
+    	style: {
+    		fontSize: '12px'
+    	}
+    },
+   
+},
+yAxis: {
+    min: 0,
+    title: {
+        text: '%',
+        align: 'high',
+        rotation: '0'
+    },
+    labels: {
+        overflow: 'justify',
+        style: {
+    		fontSize: '12px'
+    	}
+    }
+},
+tooltip: {
+	 pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+     shared: true,
+    valueSuffix: ' referrals'
+},
+plotOptions: {
+    bar: {
+        dataLabels: {
+            enabled: true
+        }
+    }
+},
+legend: {
+    layout: 'horizontal',
+    align: 'right',
+    verticalAlign: 'top',
+    x: -40,
+    y: 100,
+    floating: true,
+    borderWidth: 1,
+    backgroundColor: '#FFFFFF',
+    shadow: true,
+    enabled: false
+},
+credits: {
+    enabled: false
+},
+plotOptions: {
+    column: {
+        stacking: 'percent'
+    }
+},
+    series: [{
+    	name: 'Others',
+        data: prodother,
+        color: 'purple'
+}, {
+		name: 'Weibo',
+	    data: prodweibo,
+	    color: 'orange'
+},
+{
+    	name: 'WeChat',
+        data: prodwechat,
+        color: 'blue'
+},
+{
+    	name: 'App',
+    	data: prodapp,
+    	color: 'brown'
+}]
+});
+});
+
+
+$( document ).ready(function() {
+	if(string.warning[0].error)
+		{
+		$("#ok").attr("class", "icon-remove-sign");
+		$("#ok1").html("WARNING");
+		$("#ok2").html("There are authentication errors.");
+		$("#Warning").css("border", "10px solid red");
+		$("#ok, #ok1, #ok2").css("color", "red");
+		}
+});
+
+</script>
+
+</head>
+<body>
+<div id='title'>
+	<a href="dashboard.html"><img src="img/GenuineAceLogo.png" alt="logo" id='logo'></a>
+</div>
+<div class='bigspace'></div>
+  <ul class="nav nav-pills" id="navigation">
+    <li class="active"><a href="#dashboard" data-toggle="tab">Dashboard</a></li>
+    <li><a href="#authentication" data-toggle="tab">Authentication</a></li>
+    <li class="dropdown">
+    <a class="dropdown-toggle"
+       data-toggle="dropdown"
+       href="#">
+        Product
+        <b class="caret"></b>
+      </a>
+    <ul class="dropdown-menu">
+      <li><a href="#activityView" data-toggle="tab">Activity View</a></li>
+      <li><a href="#productManagementCATEGORY" data-toggle="tab">Product Management</a></li>
+    </ul>
+  </li>
+    <li><a href="#consumer" data-toggle="tab">Consumer</a></li>
+    <li><a href="#interaction" data-toggle="tab">Interaction</a></li>
+    <li><a href="#order" data-toggle="tab">Order</a></li>
+    <li><a href="#export" data-toggle="tab">Export</a></li>
+  </ul>
+  
+  <div class="tab-content">
+  
+    <div class="tab-pane active" id="dashboard">
+    	<div id='scancount'>
+    		<ul class="nav">
+    			<li id='scan1'>Scans By:</li>
+    			<li class='active'><a href="#scanday" data-toggle='tab' id='scan2'>DAY</a></li>
+    			<li><a href="#scanmonth" data-toggle='tab' id='scan3'>MONTH</a></li>
+    			<li><a href="#scanyear" data-toggle='tab'  id='scan4'>YEAR</a></li>
+    		</ul>
+    		<div class="tab-content">
+    			<div class="tab-pane active" id="scanday"> 
+						<div id='daycount'>2</div>
+						<div class="scans">SCANS</div>
+    			</div>
+    			<div class="tab-pane" id="scanmonth"> 
+    				<div id='monthcount'>10</div>
+					<div class="scans">SCANS</div>
+    			</div>
+    			<div class="tab-pane" id="scanyear">
+    				<div id='yearcount'>140</div>
+					<div class="scans">SCANS</div>
+    			</div>
+    			
+    			
+    		</div>
+    	</div>
+    	<div id='CounterfeitRatio'></div>
+    	<div id='Warning'>
+    		<i class='icon-ok-sign' id='ok'></i>
+    		<h2 id='ok1'> NO WARNING</h2>
+    		<p id='ok2'>Authentication is healthy and no erroneous scan found.</p>
+    	</div>
+    	
+    </div>
+    
+    <div class="tab-pane" id="authentication">
+    	<h2>Geographic Statistics</h2>
+    	<h2 id='timestat'>Time Statistics	</h2>
+		<div id="UniqueScanCount"></div>
+		<div id="TotalScanCount"></div>
+		<div id="InvalidScanCount"></div>
+		<div id="SuccessFailedRatio"></div>
+		<div id="SuccessFailedCountTime"></div>
+		<div id="UniqueAndTotalScan"></div>
+    </div>
+    
+     <div class="tab-pane" id="activityView">
+     <ul class="breadcrumb">
+  		<li class='fakeactive'>Product<span class="divider">/</span></li>
+  		<li class="active">Activity View</li>
+	 </ul>
+      <div id="ScannedItemsOfEachProduct"></div>
+      <div id="TotalScansOfEachProduct"></div>
+      <div id="ProductReferralChannels"></div>
+    </div>
+    
+    <div class="tab-pane" id="productManagementCATEGORY">
+    <ul class="breadcrumb">
+  		<li class='fakeactive'>Product<span class="divider">/</span></li>
+  		<li class='fakeactive'>Product Management<span class="divider">/</span></li>
+  		<li class="active">Category</li>
+	 </ul>
+      <table class='table' id='categorytable'>
+      		<thead><th>Category</th><th>Category ID</th><th>Description</th><th>Product Quantity</th><th>Scan Count</th><th>Unique Scan Count</th><th>Share Count</th></thead>
+      		<tbody>
+      			<tr ><td><a href="#productManagementRED" data-toggle="tab">Red Wine</a></td><td>1</td><td>2008 Red Wine</td><td>5000</td><td>17201</td><td>3203</td><td>1740</td></tr>
+      			<tr><td><a href="#productManagementWHITE" data-toggle="tab">White Wine</a></td><td>2</td><td>2007 White Wine</td><td>8000</td><td>22802</td><td>5824</td><td>3942</td></tr>
+      			<tr><td><a href="#productManagementADDCATEGORY" data-toggle="tab"><i class='icon-plus-sign'></i> Add New Category</a></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      		</tbody>
+      </table>
+    </div>
+    <div class='tab-pane' id="productManagementRED">
+    <ul class="breadcrumb">
+  		<li	class='fakeactive'>Product<span class="divider">/</span></li>
+  		<li class="fakeactive">Product Management<span class="divider">/</span></li>
+  		<li><a href="#productManagementCATEGORY" data-toggle='tab'>Category</a> <span class="divider">/</span></li>
+  		<li class="active">Red Wine</li>
+	 </ul>
+    	<table class='table' id='redwinetable'>
+      		<thead><th>Product</th><th>Product ID</th><th>Description</th><th>Quantity</th><th>Scann Count</th><th>Unique Scan Count</th><th>Share Count</th><th>Status</th></thead>
+      		<tbody>
+      			<tr><td><a href="#" rel='popover' data-toggle='popover' data-content="<a href='#'>EDIT</a> | <a href='#'>DELETE</a> | <a href='#'>DEACTIVATE</a>" data-html='true' id='productA'>Product A</a></td><td>001</td><td>Blah Blah Blah Blah</td><td>2500</td><td>25201</td><td>303</td><td>1140</td><td>Active</td></tr>
+      			<tr><td><a href="#" rel='popover' data-toggle='popover' data-content="<a href='#'>EDIT</a> | <a href='#'>DELETE</a> | <a href='#'>DEACTIVATE</a>" data-html='true' id='productB'>Product B</a></td><td>002</td><td>Description 2</td><td>2000</td><td>22402</td><td>1824</td><td>842</td><td>Active</td></tr>
+      			<tr><td><a href="#" rel='popover' data-toggle='popover' data-content="<a href='#'>ACTIVATE</a>" data-html='true' id='productC'>Product C</a></td><td>003</td><td>LALALA blah</td><td>3000</td><td>802</td><td>5224</td><td>2542</td><td>Inactive</td></tr>
+      			<tr><td><a href="#productManagementADDPRODUCT" data-toggle="tab"><i class='icon-plus-sign'></i> Add New Product</a></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      		</tbody>
+      </table>
+    </div>
+    <div class='tab-pane' id="productManagementWHITE">
+    <ul class="breadcrumb">
+  		<li	class='fakeactive'>Product<span class="divider">/</span></li>
+  		<li class="fakeactive">Product Management<span class="divider">/</span></li>
+  		<li><a href="#productManagementCATEGORY" data-toggle='tab'>Category</a> <span class="divider">/</span></li>
+  		<li class="active">White Wine</li>
+	 </ul>
+    	<p>White WINE</p>
+    </div>
+    <div class='tab-pane' id="productManagementADDCATEGORY">
+    <ul class="breadcrumb">
+  		<li	class='fakeactive'>Product<span class="divider">/</span></li>
+  		<li class="fakeactive">Product Management<span class="divider">/</span></li>
+  		<li><a href="#productManagementCATEGORY" data-toggle='tab'>Category</a> <span class="divider">/</span></li>
+  		<li class="active">Add Category</li>
+	 </ul>
+	 	<form action='' method='get' class='form-horizontal'>
+			<div class="control-group">
+			    <label class="control-label" for="categoryNAME">Category Name:</label>
+			    <div class="controls">
+			      <input type="text" name='categoryNAME' id='categoryNAME' >
+			    </div>
+			</div>
+			<div class="control-group">
+			    <label class="control-label" for="categoryID">Category ID:</label>
+			    <div class="controls">
+			      <input type="number" name='categoryID' id='categoryID' >
+			    </div>
+			</div>
+			<div class="control-group">
+			    <label class="control-label" for="categoryURL">URL:</label>
+			    <div class="controls">
+			      <input type="url" id='categoryURL' name='categoryURL' >
+			    </div>
+			</div>	
+		 		<div id='categoryDESCRIPTION'><div>Category Description:</div> <textarea name='productDESCRIPTION' style="height: 160px;"></textarea></div>
+		 		<input type='submit' id='categorysubmit' value='Add and Exit' class='btn btn-warning btn-large' />
+	 	</form>
+	 	
+    </div>
+    <div class='tab-pane' id="productManagementADDPRODUCT">
+    <ul class="breadcrumb">
+  		<li	class='fakeactive'>Product<span class="divider">/</span></li>
+  		<li class="fakeactive">Product Management<span class="divider">/</span></li>
+  		<li><a href="#productManagementCATEGORY" data-toggle='tab'>Category</a> <span class="divider">/</span></li>
+  		<li class="active">Add Product</li>
+	 </ul>
+	 	<form action='' method='get' class='form-horizontal'>
+		 	<div class="control-group">
+			    <label class="control-label" for="productName">Product Name:</label>
+			    <div class="controls">
+			      <input type="text" name='productName' id='productName' >
+			    </div>
+			</div>
+			<div class="control-group">
+			    <label class="control-label" for="productID">Product ID:</label>
+			    <div class="controls">
+			      <input type="number" name='productID' id='productID' >
+			    </div>
+			</div>
+			<div class="control-group">
+			    <label class="control-label" for="productPRICE">Price:</label>
+			    <div class="controls">
+			      <input type="number" id='productPRICE' name='productPRICE' >
+			    </div>
+			</div>
+			<div class="control-group">
+			    <label class="control-label" for="productURL">URL:</label>
+			    <div class="controls">
+			      <input type="url" id='productURL' name='productURL' >
+			    </div>
+			</div>	
+		 		<div id='productDESCRIPTION'><div>Product Description:</div> <textarea style='height: 80px;' name='productDESCRIPTION'></textarea></div>
+		 		<div id='usageDESCRIPTION'><div>Usage Description:</div> <textarea style='height: 80px;' name='usageDESCRIPTION'></textarea></div>
+		 		<!-- <input type='file' class='btn btn-success' name='productTHUMBNAIL' id='productTHUMBNAIL' accept="image/*" size='100' />
+		 		<img id='productIMG' style="height: 160px; width: 160px;" src='img/placeholder.jpg' alt="Product Image"/>
+		 		-->
+		 		<div class="fileupload fileupload-new" data-provides="fileupload">
+  <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src='img/placeholder.jpg' /></div>
+  <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
+  <div>
+    <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" /></span>
+    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
+  </div>
+</div>
+		 		<input type='submit' id='categorysubmit' value='Add and Exit' class='btn btn-warning btn-large' />
+		 		
+	 	</form>
+	 	 
+	 	
+    </div>
+    
+    <div class="tab-pane" id="consumer">
+      <p>Consumer Section.</p>
+    </div>
+    
+    <div class="tab-pane" id="interaction">
+      <p>Interaction Section.</p>
+    </div>
+    
+    <div class="tab-pane" id="order">
+      <p>Order Section.</p>
+    </div>
+    
+    <div class="tab-pane" id="export">
+      <p>Export Section.</p>
+    </div>
+    
+  </div>
+</body>
+</html>
