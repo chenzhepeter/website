@@ -7,7 +7,11 @@
  *
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
  */
-	
+#productsubmit {
+position: absolute;
+top: 425px;
+left: 523px;
+}	
  #categorysubmit{
 	position: relative;
 	top: -195px;
@@ -20,21 +24,41 @@
 }
 #productDESCRIPTION {
 position: relative;
-top: -322px;
+top: -402px;
 left: 455px;
 }
 #usageDESCRIPTION {
 position: relative;
-top: -270px;
+top: -339px;
 left: 455px;
 }
 .fakeactive{
 	color: #999999;
 }
-#Warning{
+#UniqueScanCount, #TotalScanCount, #InvalidScanCount, #SuccessFailedRatio, #SuccessFailedCountTime,#UniqueAndTotalScan{
+	height: 500px;
+}
+#CounterfeitRatio{
+height:350px;
+}
+
+#title {
+	height: 125px;
+	background-color: black;
+}
+#logo {
 	position: relative;
-	top: -630px;
-	left: 980px;
+	top: 20px;
+	left: 20px;
+	width: 600px;
+	height: 80px;
+}
+#navigation {
+	position: relative;
+	left: 31px;
+	font-size: 23px;
+}
+#Warning{	
 	border: 10px solid green;
 	width: 280px;
 	height: 280px;
@@ -61,81 +85,7 @@ left: 455px;
 	font-size: 23px;
 		color: green;
 }
-#UniqueScanCount {
-	width: 600px;
-	height: 500px;
-	position: relative;
-	top: -10px;
-}
-#TotalScanCount{
-	width: 600px;
-	height: 500px;
-	position: relative;
-	top: -510px;
-	left: 640px;
-}
-#InvalidScanCount{
-	width: 600px;
-	height: 500px;
-	position: relative;
-	top: -460px;
-	
-}
-#SuccessFailedRatio{
-	width: 600px;
-	height: 500px;
-	position: relative;
-	top: -960px;
-	left: 640px;
-}
-#CounterfeitRatio{
-	width: 600px;
-	height: 350px;
-	position: relative;
-	top: -286px;
-	left: 350px;
-	
-}
-#SuccessFailedCountTime{
-	width: 600px;
-	height: 500px;
-	position: relative;
-	top: -850px;
-
-}
-#UniqueAndTotalScan{
-	width: 600px;
-	height: 500px;
-	position: relative;
-	top: -1350px;
-	left: 640px;
-}
-
-#timestat {
-position: relative;
-top: 1130px;
-}
-
-#title {
-	height: 125px;
-	background-color: black;
-}
-#logo {
-	position: relative;
-	top: 20px;
-	left: 20px;
-	width: 600px;
-	height: 80px;
-}
-#navigation {
-	position: relative;
-	left: 31px;
-	font-size: 23px;
-}
 #scancount{
-	position: relative;
-	top: 20px;
-	left: 10px;
 	width: 300px;
 	height:300px;
 	background-color: #FFA831;
@@ -185,7 +135,7 @@ left: 237px;
 	height: 15px;
 }
 .medspace {
-	height: 30px;
+	height: 25px;
 }
 .bigspace {
 	height: 45px;
@@ -493,11 +443,6 @@ a:focus {
   -webkit-border-radius: 500px;
      -moz-border-radius: 500px;
           border-radius: 500px;
-}
-
-.row {
-  margin-left: -20px;
-  *zoom: 1;
 }
 
 .row:before,
@@ -3579,15 +3524,14 @@ input[type="button"].btn-block {
 .btn-primary {
   color: #ffffff;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  background-color: #006dcc;
-  *background-color: #0044cc;
-  background-image: -moz-linear-gradient(top, #FFA831, #0044cc);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FFA831), to(#0044cc));
-  background-image: -webkit-linear-gradient(top, #FFA831, #0044cc);
-  background-image: -o-linear-gradient(top, #FFA831, #0044cc);
-  background-image: linear-gradient(to bottom, #FFA831, #0044cc);
+  *background-color: orange;
+  background-image: -moz-linear-gradient(top, #FFA831, orange);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FFA831), to(orange));
+  background-image: -webkit-linear-gradient(top, #FFA831, orange);
+  background-image: -o-linear-gradient(top, #FFA831, orange);
+  background-image: linear-gradient(to bottom, #FFA831, orange);
   background-repeat: repeat-x;
-  border-color: #0044cc #0044cc #002a80;
+  border-color: orange orange #002a80;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0044cc', GradientType=0);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
@@ -3600,7 +3544,7 @@ input[type="button"].btn-block {
 .btn-primary.disabled,
 .btn-primary[disabled] {
   color: #ffffff;
-  background-color: #0044cc;
+  background-color: orange;
   *background-color: #003bb3;
 }
 
@@ -3989,7 +3933,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .btn-group.open .btn-primary.dropdown-toggle {
-  background-color: #0044cc;
+  background-color: orange;
 }
 
 .btn-group.open .btn-warning.dropdown-toggle {

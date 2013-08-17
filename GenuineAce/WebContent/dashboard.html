@@ -5,8 +5,10 @@
 	<title>GenuineAce Dashboard</title>
 	<link rel="stylesheet" media="screen" href="css/bootstrap.css" type="text/css">
 	<link rel="stylesheet" media="screen" href="css/font-awesome.css" type="text/css">
+	<link rel="stylesheet" media="screen" href="css/fileUpload.css" type="text/css">
 
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+
+	<script src='js/jquery.js'></script>
 	<script src="js/highcharts.js"></script>
 	<script src="js/exporting.js"></script>
 	<script src="js/bootstrap.js"></script>
@@ -15,8 +17,10 @@
 	<script src="js/tooltip.js"></script>
 	<script src="js/popover.js"></script>
 	<script src="js/fileUpload.js"></script>
+	<script src="js/modal.js"></script>
 	
 	<script>
+	//JSON data for all graphs and warning message
 	var string={"unique":[{"city":"Beijing","value":11},{"city":"Shanghai","value":9},{"city":"Tianjing","value":9},{"city":"Wuhan","value":8},{"city":"Chengdu","value":7},{"city":"Guangzhou","value":7},{"city":"Taiyuan","value":5},{"city":"Gansu","value":4},{"city":"Ningzhau","value":4},{"city":"Chongqing","value":2}],
 			"total":[{"city":"Wuhan","value":27},{"city":"Tianjing","value":24},{"city":"Taiyuan","value":17},{"city":"Beijing","value":16},{"city":"Shanghai","value":16},{"city":"Guangzhou","value":12},{"city":"Chengdu","value":10},{"city":"Gansu","value":9},{"city":"Ningzhau","value":5},{"city":"Chongqing","value":2}],
 			"invalid":[{"city":"Wuhan","value":10},{"city":"Tianjing","value":8},{"city":"Taiyuan","value":8},{"city":"Beijing","value":7},{"city":"Shanghai","value":6},{"city":"Guangzhou","value":4},{"city":"Chengdu","value":4},{"city":"Gansu","value":3},{"city":"Ningzhau","value":3},{"city":"Chongqing","value":2}],
@@ -26,6 +30,7 @@
 			"scanVSfavourite":[{}],
 			"warning":[{"error": false}]
 	};
+	
 	//Data for UNIQUE SCAN COUNT
 	var uniquecity=[];
 	var uniquevalue=[];
@@ -97,8 +102,8 @@
 		prodother[i]=string.products[i].Others;
 	}
 	
-	
-	$(function () {
+//Unique Scan Count Chart	
+$(function () {
         $('#UniqueScanCount').highcharts({
             chart: {
                 type: 'column'
@@ -152,15 +157,6 @@
                 }
             },
             legend: {
-                layout: 'horizontal',
-                align: 'right',
-                verticalAlign: 'top',
-                x: -40,
-                y: 100,
-                floating: true,
-                borderWidth: 1,
-                backgroundColor: '#FFFFFF',
-                shadow: true,
                 enabled: false
             },
             credits: {
@@ -173,7 +169,7 @@
             }]
         });
     });
-    
+ //Total Scan Count Chart   
 $(function () {
     $('#TotalScanCount').highcharts({
         chart: {
@@ -204,14 +200,7 @@ $(function () {
             min: 0,
             title: {
                 text: '',
-                align: 'high'
             },
-            labels: {
-                overflow: 'justify',
-                style: {
-            		fontSize: '12px'
-            	}
-            }
         },
         tooltip: {
             valueSuffix: ' scans'
@@ -224,15 +213,6 @@ $(function () {
             }
         },
         legend: {
-            layout: 'horizontal',
-            align: 'right',
-            verticalAlign: 'top',
-            x: -40,
-            y: 100,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor: '#FFFFFF',
-            shadow: true,
             enabled: false
         },
         credits: {
@@ -245,8 +225,9 @@ $(function () {
         }]
     });
 });
-    
+ //Invalid Scan Count Chart   
 $(function () {
+
     $('#InvalidScanCount').highcharts({
         chart: {
             type: 'column'
@@ -276,14 +257,7 @@ $(function () {
             min: 0,
             title: {
                 text: '',
-                align: 'high'
             },
-            labels: {
-                overflow: 'justify',
-                style: {
-            		fontSize: '12px'
-            	}
-            }
         },
         tooltip: {
             valueSuffix: ' scans'
@@ -296,15 +270,6 @@ $(function () {
             }
         },
         legend: {
-            layout: 'horizontal',
-            align: 'right',
-            verticalAlign: 'top',
-            x: -40,
-            y: 100,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor: '#FFFFFF',
-            shadow: true,
             enabled: false
         },
         credits: {
@@ -317,6 +282,7 @@ $(function () {
         }]
     });
 });
+//Counterfeit Scan Chart (2)
 $(function () {
 var options = {
         chart: {
@@ -370,15 +336,6 @@ var options = {
             }
         },
         legend: {
-            layout: 'horizontal',
-            align: 'right',
-            verticalAlign: 'top',
-            x: -40,
-            y: 100,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor: '#FFFFFF',
-            shadow: true,
             enabled: false
         },
         credits: {
@@ -403,6 +360,7 @@ $('#SuccessFailedRatio').highcharts(options);
 $('#CounterfeitRatio').highcharts(options);
 });
 
+//Success Failed Chart (time)
 $(function () {
     $('#SuccessFailedCountTime').highcharts({
         title: {
@@ -419,7 +377,6 @@ $(function () {
         yAxis: {
         	title: {
                 text: '',
-                align: 'high'
         	}
         },
         tooltip: {
@@ -447,6 +404,7 @@ $(function () {
     });
 });
 
+//Unique Total Chart (time)
 $(function () {
     $('#UniqueAndTotalScan').highcharts({
         title: {
@@ -463,7 +421,6 @@ $(function () {
         yAxis: {
         	title: {
                 text: '',
-                align: 'high'
         	}
         },
         tooltip: {
@@ -491,6 +448,7 @@ $(function () {
     });
 });
 
+//Scanned Items of each product chart
 $(function () {
     $('#ScannedItemsOfEachProduct').highcharts({
         chart: {
@@ -521,14 +479,7 @@ $(function () {
             min: 0,
             title: {
                 text: '',
-                align: 'high'
             },
-            labels: {
-                overflow: 'justify',
-                style: {
-            		fontSize: '12px'
-            	}
-            }
         },
         tooltip: {
             valueSuffix: ' scans'
@@ -541,15 +492,6 @@ $(function () {
             }
         },
         legend: {
-            layout: 'horizontal',
-            align: 'right',
-            verticalAlign: 'top',
-            x: -40,
-            y: 100,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor: '#FFFFFF',
-            shadow: true,
             enabled: false
         },
         credits: {
@@ -563,6 +505,7 @@ $(function () {
     });
 });
 
+//Total scans of each product chart
 $(function () {
     $('#TotalScansOfEachProduct').highcharts({
         chart: {
@@ -593,14 +536,7 @@ $(function () {
             min: 0,
             title: {
                 text: '',
-                align: 'high'
             },
-            labels: {
-                overflow: 'justify',
-                style: {
-            		fontSize: '12px'
-            	}
-            }
         },
         tooltip: {
             valueSuffix: ' scans'
@@ -613,15 +549,6 @@ $(function () {
             }
         },
         legend: {
-            layout: 'horizontal',
-            align: 'right',
-            verticalAlign: 'top',
-            x: -40,
-            y: 100,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor: '#FFFFFF',
-            shadow: true,
             enabled: false
         },
         credits: {
@@ -635,6 +562,7 @@ $(function () {
     });
 });
 
+//Product referrals chart
 $(function () {
     $('#ProductReferralChannels').highcharts({
 chart: {
@@ -688,15 +616,6 @@ plotOptions: {
     }
 },
 legend: {
-    layout: 'horizontal',
-    align: 'right',
-    verticalAlign: 'top',
-    x: -40,
-    y: 100,
-    floating: true,
-    borderWidth: 1,
-    backgroundColor: '#FFFFFF',
-    shadow: true,
     enabled: false
 },
 credits: {
@@ -729,8 +648,9 @@ plotOptions: {
 });
 });
 
-
+//Warning or no warning.  string.warning[0].error returns either true or false
 $( document ).ready(function() {
+$('#productA, #productB, #productC').popover();
 	if(string.warning[0].error)
 		{
 		$("#ok").attr("class", "icon-remove-sign");
@@ -740,15 +660,24 @@ $( document ).ready(function() {
 		$("#ok, #ok1, #ok2").css("color", "red");
 		}
 });
-
+$(document).ready(function() {
+    if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
+    return $('a[data-toggle="tab"]').on('shown', function(e) {
+      return location.hash = $(e.target).attr('href').substr(1);
+    });
+});
 </script>
 
 </head>
 <body>
+
+<!--Header -->
 <div id='title'>
 	<a href="dashboard.html"><img src="img/GenuineAceLogo.png" alt="logo" id='logo'></a>
 </div>
 <div class='bigspace'></div>
+
+<!-- Tab menu -->
   <ul class="nav nav-pills" id="navigation">
     <li class="active"><a href="#dashboard" data-toggle="tab">Dashboard</a></li>
     <li><a href="#authentication" data-toggle="tab">Authentication</a></li>
@@ -771,52 +700,67 @@ $( document ).ready(function() {
   </ul>
   
   <div class="tab-content">
-  
+<!-- Tab - dashboard -->
     <div class="tab-pane active" id="dashboard">
-    	<div id='scancount'>
-    		<ul class="nav">
-    			<li id='scan1'>Scans By:</li>
-    			<li class='active'><a href="#scanday" data-toggle='tab' id='scan2'>DAY</a></li>
-    			<li><a href="#scanmonth" data-toggle='tab' id='scan3'>MONTH</a></li>
-    			<li><a href="#scanyear" data-toggle='tab'  id='scan4'>YEAR</a></li>
-    		</ul>
-    		<div class="tab-content">
-    			<div class="tab-pane active" id="scanday"> 
-						<div id='daycount'>2</div>
+		<div class='row'>
+			<div id='scancount' class='span1'>
+				<ul class="nav">
+					<li id='scan1'>Scans By:</li>
+					<li class='active'><a href="#scanday" data-toggle='tab' id='scan2'>DAY</a></li>
+					<li><a href="#scanmonth" data-toggle='tab' id='scan3'>MONTH</a></li>
+					<li><a href="#scanyear" data-toggle='tab'  id='scan4'>YEAR</a></li>
+				</ul>
+				<div class="tab-content">
+					<div class="tab-pane active" id="scanday"> 
+							<div id='daycount'>2</div>
+							<div class="scans">SCANS</div>
+					</div>
+					<div class="tab-pane" id="scanmonth"> 
+						<div id='monthcount'>10</div>
 						<div class="scans">SCANS</div>
-    			</div>
-    			<div class="tab-pane" id="scanmonth"> 
-    				<div id='monthcount'>10</div>
-					<div class="scans">SCANS</div>
-    			</div>
-    			<div class="tab-pane" id="scanyear">
-    				<div id='yearcount'>140</div>
-					<div class="scans">SCANS</div>
-    			</div>
-    			
-    			
-    		</div>
-    	</div>
-    	<div id='CounterfeitRatio'></div>
-    	<div id='Warning'>
-    		<i class='icon-ok-sign' id='ok'></i>
-    		<h2 id='ok1'> NO WARNING</h2>
-    		<p id='ok2'>Authentication is healthy and no erroneous scan found.</p>
-    	</div>
+					</div>
+					<div class="tab-pane" id="scanyear">
+						<div id='yearcount'>140</div>
+						<div class="scans">SCANS</div>
+					</div>
+					
+					
+				</div>
+			</div>
+			<div id='CounterfeitRatio' class='span6 offset1'></div>
+			<div id='Warning' class='span1 offset1'>
+				<i class='icon-ok-sign' id='ok'></i>
+				<h2 id='ok1'> NO WARNING</h2>
+				<p id='ok2'>Authentication is healthy and no erroneous scan found.</p>
+			</div>
+		</div>
+		
     	
     </div>
-    
+ 
+<!-- Tab - Authentication --> 
     <div class="tab-pane" id="authentication">
     	<h2>Geographic Statistics</h2>
-    	<h2 id='timestat'>Time Statistics	</h2>
-		<div id="UniqueScanCount"></div>
-		<div id="TotalScanCount"></div>
-		<div id="InvalidScanCount"></div>
-		<div id="SuccessFailedRatio"></div>
-		<div id="SuccessFailedCountTime"></div>
-		<div id="UniqueAndTotalScan"></div>
+		<div class='medspace'></div>
+		<div class='row'>
+			<div id="UniqueScanCount" class='span7'></div>
+			<div id="TotalScanCount" class='span7 offset1'></div>
+		</div>
+		<div class='medspace'></div>
+		<div class='row'>
+			<div id="InvalidScanCount" class='span7'></div>
+			<div id="SuccessFailedRatio" class='span7 offset1'></div>
+		</div>
+		<div class='medspace'></div>
+		<h2>Time Statistics	</h2>
+		<div class='medspace'></div>
+		<div class='row'>
+			<div id="SuccessFailedCountTime" class='span7'></div>
+			<div id="UniqueAndTotalScan" class='span7 offset1'></div>
+		</div>
     </div>
-    
+
+<!-- Tab - Product/Activity View -->     
      <div class="tab-pane" id="activityView">
      <ul class="breadcrumb">
   		<li class='fakeactive'>Product<span class="divider">/</span></li>
@@ -826,7 +770,8 @@ $( document ).ready(function() {
       <div id="TotalScansOfEachProduct"></div>
       <div id="ProductReferralChannels"></div>
     </div>
-    
+
+<!-- Tab - Product/Product management/Category -->     
     <div class="tab-pane" id="productManagementCATEGORY">
     <ul class="breadcrumb">
   		<li class='fakeactive'>Product<span class="divider">/</span></li>
@@ -842,6 +787,8 @@ $( document ).ready(function() {
       		</tbody>
       </table>
     </div>
+  
+<!-- Tab - Product/Product Management/Category/Red Wine -->  
     <div class='tab-pane' id="productManagementRED">
     <ul class="breadcrumb">
   		<li	class='fakeactive'>Product<span class="divider">/</span></li>
@@ -850,15 +797,17 @@ $( document ).ready(function() {
   		<li class="active">Red Wine</li>
 	 </ul>
     	<table class='table' id='redwinetable'>
-      		<thead><th>Product</th><th>Product ID</th><th>Description</th><th>Quantity</th><th>Scann Count</th><th>Unique Scan Count</th><th>Share Count</th><th>Status</th></thead>
+      		<thead><th>Product</th><th>Product ID</th><th>Description</th><th>Quantity</th><th>Scan Count</th><th>Unique Scan Count</th><th>Share Count</th><th>Status</th></thead>
       		<tbody>
-      			<tr><td><a href="#" rel='popover' data-toggle='popover' data-content="<a href='#'>EDIT</a> | <a href='#'>DELETE</a> | <a href='#'>DEACTIVATE</a>" data-html='true' id='productA'>Product A</a></td><td>001</td><td>Blah Blah Blah Blah</td><td>2500</td><td>25201</td><td>303</td><td>1140</td><td>Active</td></tr>
+      			<tr><td><a href="#" rel='popover' data-toggle='popover' data-content="<a href='#productManagementEDITPRODUCT' data-toggle='tab'>EDIT</a> | <a href='#productManagementDeleteProduct' data-toggle='modal'>DELETE</a> | <a href='#productManagementDeactivateProduct' data-toggle='modal''>DEACTIVATE</a>" data-html='true' id='productA'>Product A</a></td><td>001</td><td>Blah Blah Blah Blah</td><td>2500</td><td>25201</td><td>303</td><td>1140</td><td>Active</td></tr>
       			<tr><td><a href="#" rel='popover' data-toggle='popover' data-content="<a href='#'>EDIT</a> | <a href='#'>DELETE</a> | <a href='#'>DEACTIVATE</a>" data-html='true' id='productB'>Product B</a></td><td>002</td><td>Description 2</td><td>2000</td><td>22402</td><td>1824</td><td>842</td><td>Active</td></tr>
-      			<tr><td><a href="#" rel='popover' data-toggle='popover' data-content="<a href='#'>ACTIVATE</a>" data-html='true' id='productC'>Product C</a></td><td>003</td><td>LALALA blah</td><td>3000</td><td>802</td><td>5224</td><td>2542</td><td>Inactive</td></tr>
+      			<tr><td><a href="#" rel='popover' data-toggle='popover' data-content="<a href='#productManagementActivateProduct' data-toggle='modal''>ACTIVATE</a>" data-html='true' id='productC'>Product C</a></td><td>003</td><td>LALALA blah</td><td>3000</td><td>802</td><td>5224</td><td>2542</td><td>Inactive</td></tr>
       			<tr><td><a href="#productManagementADDPRODUCT" data-toggle="tab"><i class='icon-plus-sign'></i> Add New Product</a></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
       		</tbody>
       </table>
     </div>
+
+<!-- Tab - Product/Product Management/Category/White Wine -->  
     <div class='tab-pane' id="productManagementWHITE">
     <ul class="breadcrumb">
   		<li	class='fakeactive'>Product<span class="divider">/</span></li>
@@ -868,6 +817,8 @@ $( document ).ready(function() {
 	 </ul>
     	<p>White WINE</p>
     </div>
+
+<!-- Tab - Product/Product Management/Category/Add Category -->  
     <div class='tab-pane' id="productManagementADDCATEGORY">
     <ul class="breadcrumb">
   		<li	class='fakeactive'>Product<span class="divider">/</span></li>
@@ -899,6 +850,8 @@ $( document ).ready(function() {
 	 	</form>
 	 	
     </div>
+
+<!-- Tab - Product/Product Management/Category/Add Product -->  
     <div class='tab-pane' id="productManagementADDPRODUCT">
     <ul class="breadcrumb">
   		<li	class='fakeactive'>Product<span class="divider">/</span></li>
@@ -930,39 +883,102 @@ $( document ).ready(function() {
 			    <div class="controls">
 			      <input type="url" id='productURL' name='productURL' >
 			    </div>
+			</div>
+			<div id='productCATEGORY' class='control-group'>
+				<label class="control-label" for="productCAT">Category:</label>
+				<div class="controls">
+					<select id='productCAT' name='productCAT' onchange="if(selectedIndex==2){location = this.options[this.selectedIndex].value; document.location.reload();}">
+						<option value='Red Wine'>Red Wine</option>
+						<option value='White Wine'>White Wine</option>
+						<option value='#productManagementADDCATEGORY'>Add New Category</option>
+					 </select>
+				</div>
 			</div>	
-		 		<div id='productDESCRIPTION'><div>Product Description:</div> <textarea style='height: 80px;' name='productDESCRIPTION'></textarea></div>
-		 		<div id='usageDESCRIPTION'><div>Usage Description:</div> <textarea style='height: 80px;' name='usageDESCRIPTION'></textarea></div>
-		 		<!-- <input type='file' class='btn btn-success' name='productTHUMBNAIL' id='productTHUMBNAIL' accept="image/*" size='100' />
-		 		<img id='productIMG' style="height: 160px; width: 160px;" src='img/placeholder.jpg' alt="Product Image"/>
-		 		-->
+			
+		 		<div id='productDESCRIPTION'><div>Product Description:</div> <textarea style='height: 115px;' name='productDESCRIPTION'></textarea></div>
+		 		<div id='usageDESCRIPTION'><div>Usage Description:</div> <textarea style='height: 115px;' name='usageDESCRIPTION'></textarea></div>
 		 		<div class="fileupload fileupload-new" data-provides="fileupload">
-  <div class="fileupload-new thumbnail" style="width: 150px; height: 150px;"><img src='img/placeholder.jpg' /></div>
-  <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 150px; max-height: 150px; line-height: 20px;"></div>
-  <div>
-    <span class="btn btn-file"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" /></span>
-    <a href="#" class="btn fileupload-exists" data-dismiss="fileupload">Remove</a>
-  </div>
-</div>
-		 		<input type='submit' id='categorysubmit' value='Add and Exit' class='btn btn-warning btn-large' />
+				  <div class="fileupload-new thumbnail" style="width: 345px; height: 270px;"><img style="width: 345px; height: 270px;" src='img/placeholder.jpg' /></div>
+				  <div class="fileupload-preview fileupload-exists thumbnail" style="width: 345px; height: 270px; line-height: 20px;"></div>
+				  <div>
+				   <span name='productTHUMBNAIL' class="btn btn-file btn-block"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" /></span>
+					<a href="#" class="btn btn-block fileupload-exists" data-dismiss="fileupload">Remove</a>
+				  </div>
+				</div>
+				
+		 		<input type='submit' id='productsubmit' value='Add and Exit' class='btn btn-warning btn-large' />
 		 		
 	 	</form>
 	 	 
 	 	
     </div>
-    
+<!-- Tab - Product/Product Management/Category/Products/Edit Product -->
+<div class='tab-pane' id="productManagementEDITPRODUCT">
+    <ul class="breadcrumb">
+  		<li	class='fakeactive'>Product<span class="divider">/</span></li>
+  		<li class="fakeactive">Product Management<span class="divider">/</span></li>
+  		<li><a href="#productManagementCATEGORY" data-toggle='tab'>Category</a> <span class="divider">/</span></li>
+  		<li><a href="#productManagementRED" data-toggle='tab'>Red Wine</a> <span class="divider">/</span></li>
+		<li class="active">Edit Existing Product</li>
+	 </ul>
+<p> edit product </p>	 
+</div>
+<!-- Modal - Delete Product -->
+<div id="productManagementDeleteProduct" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3 id="myModalLabel">DELETE PRODUCT</h3>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to delete this product?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal">No</button>
+    <button class="btn btn-primary">Yes</button>
+  </div>
+</div>
+<div id="productManagementDeactivateProduct" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3 id="myModalLabel">DEACTIVATE PRODUCT</h3>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to deactivate this product?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal">No</button>
+    <button class="btn btn-primary">Yes</button>
+  </div>
+</div>
+<div id="productManagementActivateProduct" class="modal hide fade">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">×</button>
+    <h3 id="myModalLabel">ACTIVATE PRODUCT</h3>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure you want to activate this product?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal">No</button>
+    <button class="btn btn-primary">Yes</button>
+  </div>
+</div>
+<!-- Tab - Consumer -->
     <div class="tab-pane" id="consumer">
       <p>Consumer Section.</p>
     </div>
-    
+
+<!-- Tab - Interaction -->
     <div class="tab-pane" id="interaction">
       <p>Interaction Section.</p>
     </div>
-    
+ 
+<!-- Tab - Order --> 
     <div class="tab-pane" id="order">
       <p>Order Section.</p>
     </div>
-    
+ 
+<!-- Tab - Export --> 
     <div class="tab-pane" id="export">
       <p>Export Section.</p>
     </div>
