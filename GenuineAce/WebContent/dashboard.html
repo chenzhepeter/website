@@ -18,6 +18,7 @@
 	<script src="js/popover.js"></script>
 	<script src="js/fileUpload.js"></script>
 	<script src="js/modal.js"></script>
+	<script src="js/regression.js"></script>
 	
 	<script>
 	//JSON data for all graphs and warning message
@@ -27,10 +28,10 @@
 			"sfratio":[{"city":"Chongqing","success":20,"fail":10},{"city":"Beijing","success":26,"fail":2},{"city":"Taiyuan","success":18,"fail":12},{"city":"Tianjing","success":7,"fail":10},{"city":"Chengdu","success":13,"fail":2},{"city":"Guangzhou","success":7,"fail":4},{"city":"Ningzhau","success":16,"fail":3},{"city":"Gansu","success":3,"fail":10},{"city":"Shanghai","success":8,"fail":10},{"city":"Wuhan","success":12,"fail":3}],
 			"time":[{"month":"January","success":4, "fail": 2, "unique": 5, "total": 5},{"month":"February","success":2, "fail": 3, "unique": 4, "total": 10},{"month":"March","success":6, "fail": 3, "unique": 3, "total": 15},{"month":"April","success":7, "fail": 6, "unique": 2, "total": 24},{"month":"May","success":8, "fail": 2, "unique": 5, "total": 20},{"month":"June","success":10, "fail": 7, "unique": 5, "total": 18},{"month":"July","success":5, "fail": 7, "unique": 2, "total": 12},{"month":"August","success":12, "fail": 5, "unique": 3, "total": 20},{"month":"September","success":5, "fail": 4, "unique": 1, "total": 10},{"month":"October","success":3, "fail": 5, "unique": 6, "total": 11},{"month":"November","success":8, "fail": 5, "unique": 3, "total": 15},{"month":"December","success":4, "fail": 2, "unique": 5, "total": 30}],
 			"products":[{"product": "Product A", "num": 10, "total": 88, "App": 3, "WeChat": 12, "Weibo": 5, "Others": 4}, {"product": "Product B", "num": 24, "total": 33, "App": 10, "WeChat": 4, "Weibo": 2, "Others": 6}, {"product": "Product C", "num": 14, "total": 62, "App": 6, "WeChat": 3, "Weibo": 2, "Others": 1}, {"product": "Product D", "num": 11, "total": 79, "App": 11, "WeChat": 2, "Weibo": 3, "Others": 6}, {"product": "Product E", "num": 15, "total": 32, "App": 8, "WeChat": 2, "Weibo": 1, "Others": 5}, {"product": "Product F", "num": 17, "total": 74, "App": 6, "WeChat": 1, "Weibo": 5, "Others": 2}, {"product": "Product F", "num": 17, "total": 52, "App": 9, "WeChat": 2, "Weibo": 4, "Others": 2}, {"product": "Product G", "num": 20, "total": 48, "App": 8, "WeChat": 4, "Weibo": 2, "Others": 5}, {"product": "Product G", "num": 18, "total": 60, "App": 11, "WeChat": 2, "Weibo": 4, "Others":7}, {"product": "Product H", "num": 18, "total": 32, "App": 6, "WeChat": 2, "Weibo": 3, "Others": 2}],
-			"scanVSfavourite":[{}],
-			"warning":[{"error": false}]
+			"favourite":[{"x": 1, "y": 1}, {"x": 1, "y": 2}, {"x": 2, "y": 2}, {"x": 3, "y": 5}, {"x": 4, "y": 2}, {"x": 4, "y": 8}, {"x": 6, "y": 5}, {"x": 8, "y": 7}, {"x": 10, "y": 10}, {"x": 12, "y": 8}],
+			"warning":[{"error": false}],
+			"productA":[{"name": "product A", 'id': "001", 'price': "29.99", 'url': "www.example.com/productA", 'category': "Red Wine", 'description': "Blah Blah Blah Blah", 'usage': "usage description here", 'thumbnail': "src"}] 
 	};
-	
 	//Data for UNIQUE SCAN COUNT
 	var uniquecity=[];
 	var uniquevalue=[];
@@ -100,6 +101,16 @@
 		prodwechat[i]=string.products[i].WeChat;
 		prodweibo[i]=string.products[i].Weibo;
 		prodother[i]=string.products[i].Others;
+	}
+	
+	//Data for Scan vs. Favourite Chart
+	var favourite=[];
+	for (var i=0;i<string.favourite.length;i++)
+	{
+		var fav= [];
+			fav[0]=string.favourite[i].x;
+			fav[1]=string.favourite[i].y;
+			favourite[i]=fav;
 	}
 	
 //Unique Scan Count Chart	
@@ -562,6 +573,59 @@ $(function () {
     });
 });
 
+//Scan vs. Favourite Chart
+$(function () {
+        $('#scanVsFavourite').highcharts({
+            chart: {
+                type: 'scatter',
+                zoomType: 'xy'
+            },
+            title: {
+                text: 'Favaourite Time vs. Scanned Time',
+				style: {
+            		fontWeight: 'bold',
+            		fontSize: '22px'
+            	}
+            },
+            xAxis: {
+                title: {
+                    text: 'Scanned Time'
+                },
+				min: 0
+            },
+            yAxis: {
+                title: {
+                    text: 'Favourite Time'
+                },
+				min: 0
+            },
+            legend: {
+				enabled: false
+            },
+            plotOptions: {
+                 tooltip: {
+                        
+						
+                    }
+            },
+			credits: { enabled: false},
+            series: [{
+				type: 'scatter',
+                name: 'Product',
+                color: 'orange',
+                data: favourite
+    
+            },
+			   {
+		  type: 'line',
+		  marker: { enabled: false },
+		  data: (function() {
+			return fitData(favourite).data;
+		  })(),
+		  enableMouseTracking: false
+		  }]
+			});
+    });
 //Product referrals chart
 $(function () {
     $('#ProductReferralChannels').highcharts({
@@ -665,6 +729,7 @@ $(document).ready(function() {
     return $('a[data-toggle="tab"]').on('shown', function(e) {
       return location.hash = $(e.target).attr('href').substr(1);
     });
+	document.getElementById("addProductBreadcrumb").innerHTML="<li><a href='#productManagementRED' data-toggle='tab'>Red Wine</a> <span class='divider'>/</span></li><li class='active'>Edit Existing Product</li>";
 });
 </script>
 
@@ -679,24 +744,21 @@ $(document).ready(function() {
 
 <!-- Tab menu -->
   <ul class="nav nav-pills" id="navigation">
-    <li class="active"><a href="#dashboard" data-toggle="tab">Dashboard</a></li>
-    <li><a href="#authentication" data-toggle="tab">Authentication</a></li>
+    <li class="active"><a href="#dashboard" data-toggle='tab'>Dashboard</a></li>
+    <li><a href="#authentication" data-toggle='tab'>Authentication</a></li>
     <li class="dropdown">
-    <a class="dropdown-toggle"
-       data-toggle="dropdown"
-       href="#">
-        Product
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Product
         <b class="caret"></b>
       </a>
     <ul class="dropdown-menu">
-      <li><a href="#activityView" data-toggle="tab">Activity View</a></li>
-      <li><a href="#productManagementCATEGORY" data-toggle="tab">Product Management</a></li>
+      <li><a href="#activityView" data-toggle='tab'>Activity View</a></li>
+      <li><a href="#productManagementCATEGORY" data-toggle='tab'>Product Management</a></li>
     </ul>
   </li>
-    <li><a href="#consumer" data-toggle="tab">Consumer</a></li>
-    <li><a href="#interaction" data-toggle="tab">Interaction</a></li>
-    <li><a href="#order" data-toggle="tab">Order</a></li>
-    <li><a href="#export" data-toggle="tab">Export</a></li>
+    <li><a href="#consumer" data-toggle='tab'>Consumer</a></li>
+    <li><a href="#interaction"data-toggle='tab' >Interaction</a></li>
+    <li><a href="#order" data-toggle='tab'>Order</a></li>
+    <li><a href="#export" data-toggle='tab'>Export</a></li>
   </ul>
   
   <div class="tab-content">
@@ -762,13 +824,19 @@ $(document).ready(function() {
 
 <!-- Tab - Product/Activity View -->     
      <div class="tab-pane" id="activityView">
-     <ul class="breadcrumb">
-  		<li class='fakeactive'>Product<span class="divider">/</span></li>
-  		<li class="active">Activity View</li>
-	 </ul>
-      <div id="ScannedItemsOfEachProduct"></div>
-      <div id="TotalScansOfEachProduct"></div>
-      <div id="ProductReferralChannels"></div>
+		 <ul class="breadcrumb">
+			<li class='fakeactive'>Product<span class="divider">/</span></li>
+			<li class="active">Activity View</li>
+		 </ul>
+		 <div class='row'>
+			  <div id="ScannedItemsOfEachProduct" class='span7'></div>
+			  <div id="TotalScansOfEachProduct" class='span7 offset1'></div>
+		 </div>
+		 <div class='medspace'></div>
+		 <div class='row'>
+			  <div id='scanVsFavourite' class='span7'></div>
+			  <div id="ProductReferralChannels" class='span7 offset1'></div>
+		 </div>
     </div>
 
 <!-- Tab - Product/Product management/Category -->     
@@ -781,9 +849,9 @@ $(document).ready(function() {
       <table class='table' id='categorytable'>
       		<thead><th>Category</th><th>Category ID</th><th>Description</th><th>Product Quantity</th><th>Scan Count</th><th>Unique Scan Count</th><th>Share Count</th></thead>
       		<tbody>
-      			<tr ><td><a href="#productManagementRED" data-toggle="tab">Red Wine</a></td><td>1</td><td>2008 Red Wine</td><td>5000</td><td>17201</td><td>3203</td><td>1740</td></tr>
-      			<tr><td><a href="#productManagementWHITE" data-toggle="tab">White Wine</a></td><td>2</td><td>2007 White Wine</td><td>8000</td><td>22802</td><td>5824</td><td>3942</td></tr>
-      			<tr><td><a href="#productManagementADDCATEGORY" data-toggle="tab"><i class='icon-plus-sign'></i> Add New Category</a></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      			<tr ><td><a href="#productManagementRED"data-toggle='tab' >Red Wine</a></td><td>1</td><td>2008 Red Wine</td><td>5000</td><td>17201</td><td>3203</td><td>1740</td></tr>
+      			<tr><td><a href="#productManagementWHITE" data-toggle='tab'>White Wine</a></td><td>2</td><td>2007 White Wine</td><td>8000</td><td>22802</td><td>5824</td><td>3942</td></tr>
+      			<tr><td><a href="#productManagementADDCATEGORY" data-toggle='tab'><i class='icon-plus-sign'></i> Add New Category</a></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
       		</tbody>
       </table>
     </div>
@@ -793,7 +861,7 @@ $(document).ready(function() {
     <ul class="breadcrumb">
   		<li	class='fakeactive'>Product<span class="divider">/</span></li>
   		<li class="fakeactive">Product Management<span class="divider">/</span></li>
-  		<li><a href="#productManagementCATEGORY" data-toggle='tab'>Category</a> <span class="divider">/</span></li>
+  		<li><a href="#productManagementCATEGORY" data-toggle='tab' >Category</a> <span class="divider">/</span></li>
   		<li class="active">Red Wine</li>
 	 </ul>
     	<table class='table' id='redwinetable'>
@@ -802,7 +870,7 @@ $(document).ready(function() {
       			<tr><td><a href="#" rel='popover' data-toggle='popover' data-content="<a href='#productManagementEDITPRODUCT' data-toggle='tab'>EDIT</a> | <a href='#productManagementDeleteProduct' data-toggle='modal'>DELETE</a> | <a href='#productManagementDeactivateProduct' data-toggle='modal''>DEACTIVATE</a>" data-html='true' id='productA'>Product A</a></td><td>001</td><td>Blah Blah Blah Blah</td><td>2500</td><td>25201</td><td>303</td><td>1140</td><td>Active</td></tr>
       			<tr><td><a href="#" rel='popover' data-toggle='popover' data-content="<a href='#'>EDIT</a> | <a href='#'>DELETE</a> | <a href='#'>DEACTIVATE</a>" data-html='true' id='productB'>Product B</a></td><td>002</td><td>Description 2</td><td>2000</td><td>22402</td><td>1824</td><td>842</td><td>Active</td></tr>
       			<tr><td><a href="#" rel='popover' data-toggle='popover' data-content="<a href='#productManagementActivateProduct' data-toggle='modal''>ACTIVATE</a>" data-html='true' id='productC'>Product C</a></td><td>003</td><td>LALALA blah</td><td>3000</td><td>802</td><td>5224</td><td>2542</td><td>Inactive</td></tr>
-      			<tr><td><a href="#productManagementADDPRODUCT" data-toggle="tab"><i class='icon-plus-sign'></i> Add New Product</a></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
+      			<tr><td><a href="#productManagementADDPRODUCT" data-toggle='tab'><i class='icon-plus-sign'></i> Add New Product</a></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
       		</tbody>
       </table>
     </div>
@@ -823,7 +891,7 @@ $(document).ready(function() {
     <ul class="breadcrumb">
   		<li	class='fakeactive'>Product<span class="divider">/</span></li>
   		<li class="fakeactive">Product Management<span class="divider">/</span></li>
-  		<li><a href="#productManagementCATEGORY" data-toggle='tab'>Category</a> <span class="divider">/</span></li>
+  		<li><a href="#productManagementCATEGORY" data-toggle='tab' >Category</a> <span class="divider">/</span></li>
   		<li class="active">Add Category</li>
 	 </ul>
 	 	<form action='' method='get' class='form-horizontal'>
@@ -857,9 +925,9 @@ $(document).ready(function() {
   		<li	class='fakeactive'>Product<span class="divider">/</span></li>
   		<li class="fakeactive">Product Management<span class="divider">/</span></li>
   		<li><a href="#productManagementCATEGORY" data-toggle='tab'>Category</a> <span class="divider">/</span></li>
-  		<li class="active">Add Product</li>
+  		<li class="active">Add Product</li> 	
 	 </ul>
-	 	<form action='' method='get' class='form-horizontal'>
+	 	<form action='' method='get' class='form-horizontal' name='addProductForm'>
 		 	<div class="control-group">
 			    <label class="control-label" for="productName">Product Name:</label>
 			    <div class="controls">
@@ -921,7 +989,56 @@ $(document).ready(function() {
   		<li><a href="#productManagementRED" data-toggle='tab'>Red Wine</a> <span class="divider">/</span></li>
 		<li class="active">Edit Existing Product</li>
 	 </ul>
-<p> edit product </p>	 
+	 <form action='' method='get' class='form-horizontal' name='addProductForm'>
+		 	<div class="control-group">
+			    <label class="control-label" for="productName">Product Name:</label>
+			    <div class="controls">
+			      <input type="text" name='productName' id='productName' value='Product A'>
+			    </div>
+			</div>
+			<div class="control-group">
+			    <label class="control-label" for="productID">Product ID:</label>
+			    <div class="controls">
+			      <input type="number" name='productID' id='productID' value='001'>
+			    </div>
+			</div>
+			<div class="control-group">
+			    <label class="control-label" for="productPRICE">Price:</label>
+			    <div class="controls">
+			      <input type="number" id='productPRICE' name='productPRICE' value='39.99'>
+			    </div>
+			</div>
+			<div class="control-group">
+			    <label class="control-label" for="productURL">URL:</label>
+			    <div class="controls">
+			      <input type="url" id='productURL' name='productURL' value='www.example.com/productA'>
+			    </div>
+			</div>
+			<div id='productCATEGORY' class='control-group'>
+				<label class="control-label" for="productCAT">Category:</label>
+				<div class="controls">
+					<select id='productCAT' name='productCAT' onchange="if(selectedIndex==2){location = this.options[this.selectedIndex].value; document.location.reload();}">
+						<option value='Red Wine' selected='true'>Red Wine</option>
+						<option value='White Wine'>White Wine</option>
+						<option value='#productManagementADDCATEGORY'>Add New Category</option>
+					 </select>
+				</div>
+			</div>	
+			
+		 		<div id='productDESCRIPTION'><div>Product Description:</div> <textarea style='height: 115px;' name='productDESCRIPTION'>Blah blah blah blah</textarea></div>
+		 		<div id='usageDESCRIPTION'><div>Usage Description:</div> <textarea style='height: 115px;' name='usageDESCRIPTION'>usage description here</textarea></div>
+		 		<div class="fileupload fileupload-new" data-provides="fileupload">
+				  <div class="fileupload-new thumbnail" style="width: 345px; height: 270px;"><img style="width: 345px; height: 270px;" src='img/placeholder.jpg' /></div>
+				  <div class="fileupload-preview fileupload-exists thumbnail" style="width: 345px; height: 270px; line-height: 20px;"></div>
+				  <div>
+				   <span name='productTHUMBNAIL' class="btn btn-file btn-block"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" /></span>
+					<a href="#" class="btn btn-block fileupload-exists" data-dismiss="fileupload">Remove</a>
+				  </div>
+				</div>
+				
+		 		<input type='submit' id='productsubmit' value='Add and Exit' class='btn btn-warning btn-large' />
+		 		
+	 	</form>
 </div>
 <!-- Modal - Delete Product -->
 <div id="productManagementDeleteProduct" class="modal hide fade">
