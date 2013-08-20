@@ -17,7 +17,7 @@
 	<script src="js/tooltip.js"></script>
 	<script src="js/popover.js"></script>
 	<script src="js/fileUpload.js"></script>
-	<script src="js/modal.js"></script>
+	<script src="js/modal.js"></script>	
 	<script src="js/regression.js"></script>
 	
 	<script>
@@ -29,8 +29,7 @@
 			"time":[{"month":"January","success":4, "fail": 2, "unique": 5, "total": 5},{"month":"February","success":2, "fail": 3, "unique": 4, "total": 10},{"month":"March","success":6, "fail": 3, "unique": 3, "total": 15},{"month":"April","success":7, "fail": 6, "unique": 2, "total": 24},{"month":"May","success":8, "fail": 2, "unique": 5, "total": 20},{"month":"June","success":10, "fail": 7, "unique": 5, "total": 18},{"month":"July","success":5, "fail": 7, "unique": 2, "total": 12},{"month":"August","success":12, "fail": 5, "unique": 3, "total": 20},{"month":"September","success":5, "fail": 4, "unique": 1, "total": 10},{"month":"October","success":3, "fail": 5, "unique": 6, "total": 11},{"month":"November","success":8, "fail": 5, "unique": 3, "total": 15},{"month":"December","success":4, "fail": 2, "unique": 5, "total": 30}],
 			"products":[{"product": "Product A", "num": 10, "total": 88, "App": 3, "WeChat": 12, "Weibo": 5, "Others": 4}, {"product": "Product B", "num": 24, "total": 33, "App": 10, "WeChat": 4, "Weibo": 2, "Others": 6}, {"product": "Product C", "num": 14, "total": 62, "App": 6, "WeChat": 3, "Weibo": 2, "Others": 1}, {"product": "Product D", "num": 11, "total": 79, "App": 11, "WeChat": 2, "Weibo": 3, "Others": 6}, {"product": "Product E", "num": 15, "total": 32, "App": 8, "WeChat": 2, "Weibo": 1, "Others": 5}, {"product": "Product F", "num": 17, "total": 74, "App": 6, "WeChat": 1, "Weibo": 5, "Others": 2}, {"product": "Product F", "num": 17, "total": 52, "App": 9, "WeChat": 2, "Weibo": 4, "Others": 2}, {"product": "Product G", "num": 20, "total": 48, "App": 8, "WeChat": 4, "Weibo": 2, "Others": 5}, {"product": "Product G", "num": 18, "total": 60, "App": 11, "WeChat": 2, "Weibo": 4, "Others":7}, {"product": "Product H", "num": 18, "total": 32, "App": 6, "WeChat": 2, "Weibo": 3, "Others": 2}],
 			"favourite":[{"x": 1, "y": 1}, {"x": 1, "y": 2}, {"x": 2, "y": 2}, {"x": 3, "y": 5}, {"x": 4, "y": 2}, {"x": 4, "y": 8}, {"x": 6, "y": 5}, {"x": 8, "y": 7}, {"x": 10, "y": 10}, {"x": 12, "y": 8}],
-			"warning":[{"error": false}],
-			"productA":[{"name": "product A", 'id': "001", 'price': "29.99", 'url': "www.example.com/productA", 'category': "Red Wine", 'description': "Blah Blah Blah Blah", 'usage': "usage description here", 'thumbnail': "src"}] 
+			"warning":[{"error": false}]
 	};
 	//Data for UNIQUE SCAN COUNT
 	var uniquecity=[];
@@ -615,7 +614,7 @@ $(function () {
                 color: 'orange',
                 data: favourite
     
-            },
+				},
 			   {
 		  type: 'line',
 		  marker: { enabled: false },
@@ -724,6 +723,8 @@ $('#productA, #productB, #productC').popover();
 		$("#ok, #ok1, #ok2").css("color", "red");
 		}
 });
+
+//Add hash to url
 $(document).ready(function() {
     if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
     return $('a[data-toggle="tab"]').on('shown', function(e) {
@@ -757,7 +758,15 @@ $(document).ready(function() {
   </li>
     <li><a href="#consumer" data-toggle='tab'>Consumer</a></li>
     <li><a href="#interaction"data-toggle='tab' >Interaction</a></li>
-    <li><a href="#order" data-toggle='tab'>Order</a></li>
+    <li class="dropdown">
+	<a class="dropdown-toggle" data-toggle="dropdown" href="#">Order
+        <b class="caret"></b>
+      </a>
+    <ul class="dropdown-menu">
+      <li><a href="#newOrder" data-toggle='tab'>New Order</a></li>
+      <li><a href="#previousOrder" data-toggle='tab'>Previous Order</a></li>
+    </ul>
+	</li>
     <li><a href="#export" data-toggle='tab'>Export</a></li>
   </ul>
   
@@ -1090,9 +1099,14 @@ $(document).ready(function() {
       <p>Interaction Section.</p>
     </div>
  
-<!-- Tab - Order --> 
-    <div class="tab-pane" id="order">
-      <p>Order Section.</p>
+<!-- Tab - Order/New Order --> 
+    <div class="tab-pane" id="newOrder">
+      <p>New Order Section.</p>
+    </div>
+	
+<!-- Tab - Order/Previous Order --> 
+    <div class="tab-pane" id="previousOrder">
+      <p>Previous Order Section.</p>
     </div>
  
 <!-- Tab - Export --> 
