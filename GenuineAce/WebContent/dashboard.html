@@ -855,7 +855,7 @@ $(document).ready(function() {
   		<li class='fakeactive'>Product Management<span class="divider">/</span></li>
   		<li class="active">Category</li>
 	 </ul>
-      <table class='table' id='categorytable'>
+      <table class='table table-striped table-bordered table-hover' id='categorytable'>
       		<thead><th>Category</th><th>Category ID</th><th>Description</th><th>Product Quantity</th><th>Scan Count</th><th>Unique Scan Count</th><th>Share Count</th></thead>
       		<tbody>
       			<tr ><td><a href="#productManagementRED"data-toggle='tab' >Red Wine</a></td><td>1</td><td>2008 Red Wine</td><td>5000</td><td>17201</td><td>3203</td><td>1740</td></tr>
@@ -873,7 +873,7 @@ $(document).ready(function() {
   		<li><a href="#productManagementCATEGORY" data-toggle='tab' >Category</a> <span class="divider">/</span></li>
   		<li class="active">Red Wine</li>
 	 </ul>
-    	<table class='table' id='redwinetable'>
+    	<table class='table table-striped table-bordered table-hover' id='redwinetable'>
       		<thead><th>Product</th><th>Product ID</th><th>Description</th><th>Quantity</th><th>Scan Count</th><th>Unique Scan Count</th><th>Share Count</th><th>Status</th></thead>
       		<tbody>
       			<tr><td><a href="#" rel='popover' data-toggle='popover' data-content="<a href='#productManagementEDITPRODUCT' data-toggle='tab'>EDIT</a> | <a href='#productManagementDeleteProduct' data-toggle='modal'>DELETE</a> | <a href='#productManagementDeactivateProduct' data-toggle='modal''>DEACTIVATE</a>" data-html='true' id='productA'>Product A</a></td><td>001</td><td>Blah Blah Blah Blah</td><td>2500</td><td>25201</td><td>303</td><td>1140</td><td>Active</td></tr>
@@ -904,26 +904,36 @@ $(document).ready(function() {
   		<li class="active">Add Category</li>
 	 </ul>
 	 	<form action='' method='get' class='form-horizontal'>
-			<div class="control-group">
-			    <label class="control-label" for="categoryNAME">Category Name:</label>
-			    <div class="controls">
-			      <input type="text" name='categoryNAME' id='categoryNAME' >
-			    </div>
-			</div>
-			<div class="control-group">
-			    <label class="control-label" for="categoryID">Category ID:</label>
-			    <div class="controls">
-			      <input type="number" name='categoryID' id='categoryID' >
-			    </div>
-			</div>
-			<div class="control-group">
-			    <label class="control-label" for="categoryURL">URL:</label>
-			    <div class="controls">
-			      <input type="url" id='categoryURL' name='categoryURL' >
-			    </div>
-			</div>	
+			<div class='row'>
+				<div class='span7 offset1'>
+					<div class="control-group">
+						<label class="control-label" for="categoryNAME">Category Name:</label>
+						<div class="controls">
+						  <input type="text" name='categoryNAME' id='categoryNAME' >
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="categoryID">Category ID:</label>
+						<div class="controls">
+						  <input type="number" name='categoryID' id='categoryID' >
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="categoryURL">URL:</label>
+						<div class="controls">
+						  <input type="url" id='categoryURL' name='categoryURL' >
+						</div>
+					</div>	
+				</div>
+				<div class='span4'>
 		 		<div id='categoryDESCRIPTION'><div>Category Description:</div> <textarea name='productDESCRIPTION' style="height: 160px;"></textarea></div>
-		 		<input type='submit' id='categorysubmit' value='Add and Exit' class='btn btn-warning btn-large' />
+				</div>
+				</div>
+			<div class='row'>
+				<div class='span2 offset6'>
+			 		<input type='submit' id='categorysubmit' value='Add and Exit' style='position:relative; left: 13px;' class='btn btn-warning btn-block' />
+				</div>
+			</div>
 	 	</form>
 	 	
     </div>
@@ -937,54 +947,64 @@ $(document).ready(function() {
   		<li class="active">Add Product</li> 	
 	 </ul>
 	 	<form action='' method='get' class='form-horizontal' name='addProductForm'>
-		 	<div class="control-group">
-			    <label class="control-label" for="productName">Product Name:</label>
-			    <div class="controls">
-			      <input type="text" name='productName' id='productName' >
-			    </div>
+		<div class='row'>
+			<div class='span6'>
+					<div class="control-group">
+						<label class="control-label" for="productName">Product Name:</label>
+						<div class="controls">
+						  <input type="text" name='productName' id='productName' >
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="productID">Product ID:</label>
+						<div class="controls">
+						  <input type="number" name='productID' id='productID' >
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="productPRICE">Price:</label>
+						<div class="controls">
+						  <input type="number" id='productPRICE' name='productPRICE' >
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="productURL">URL:</label>
+						<div class="controls">
+						  <input type="url" id='productURL' name='productURL' >
+						</div>
+					</div>
+					<div id='productCATEGORY' class='control-group'>
+						<label class="control-label" for="productCAT">Category:</label>
+						<div class="controls">
+							<select id='productCAT' name='productCAT' onchange="if(selectedIndex==2){location = this.options[this.selectedIndex].value; document.location.reload();}">
+								<option value='Red Wine'>Red Wine</option>
+								<option value='White Wine'>White Wine</option>
+								<option value='#productManagementADDCATEGORY'>Add New Category</option>
+							 </select>
+						</div>
+					</div>
 			</div>
-			<div class="control-group">
-			    <label class="control-label" for="productID">Product ID:</label>
-			    <div class="controls">
-			      <input type="number" name='productID' id='productID' >
-			    </div>
-			</div>
-			<div class="control-group">
-			    <label class="control-label" for="productPRICE">Price:</label>
-			    <div class="controls">
-			      <input type="number" id='productPRICE' name='productPRICE' >
-			    </div>
-			</div>
-			<div class="control-group">
-			    <label class="control-label" for="productURL">URL:</label>
-			    <div class="controls">
-			      <input type="url" id='productURL' name='productURL' >
-			    </div>
-			</div>
-			<div id='productCATEGORY' class='control-group'>
-				<label class="control-label" for="productCAT">Category:</label>
-				<div class="controls">
-					<select id='productCAT' name='productCAT' onchange="if(selectedIndex==2){location = this.options[this.selectedIndex].value; document.location.reload();}">
-						<option value='Red Wine'>Red Wine</option>
-						<option value='White Wine'>White Wine</option>
-						<option value='#productManagementADDCATEGORY'>Add New Category</option>
-					 </select>
-				</div>
-			</div>	
-			
+			<div class='span5'>
 		 		<div id='productDESCRIPTION'><div>Product Description:</div> <textarea style='height: 115px;' name='productDESCRIPTION'></textarea></div>
-		 		<div id='usageDESCRIPTION'><div>Usage Description:</div> <textarea style='height: 115px;' name='usageDESCRIPTION'></textarea></div>
+		 		<div id='usageDESCRIPTION' style='position: relative; top: 60px;'><div>Usage Description:</div> <textarea style='height: 115px;' name='usageDESCRIPTION'></textarea></div>
+			</div>
+			<div class='span4'>
 		 		<div class="fileupload fileupload-new" data-provides="fileupload">
 				  <div class="fileupload-new thumbnail" style="width: 345px; height: 270px;"><img style="width: 345px; height: 270px;" src='img/placeholder.jpg' /></div>
 				  <div class="fileupload-preview fileupload-exists thumbnail" style="width: 345px; height: 270px; line-height: 20px;"></div>
 				  <div>
-				   <span name='productTHUMBNAIL' class="btn btn-file btn-block"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" /></span>
-					<a href="#" class="btn btn-block fileupload-exists" data-dismiss="fileupload">Remove</a>
+				   <span name='productTHUMBNAIL' class="btn btn-file" style='width: 330px;'><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" /></span>
+					<a href="#" class="btn fileupload-exists" style='width: 330px;' data-dismiss="fileupload">Remove</a>
 				  </div>
 				</div>
-				
-		 		<input type='submit' id='productsubmit' value='Add and Exit' class='btn btn-warning btn-large' />
-		 		
+			</div>
+		
+		</div> 	
+		<div class='row'>
+			<div class='span3 offset6'>
+		 		<input type='submit' value='Add and Exit' class='btn btn-warning btn-large btn-block' style='position:relative; left: 28px;'/>
+			</div>
+		</div>
 	 	</form>
 	 	 
 	 	
@@ -999,53 +1019,63 @@ $(document).ready(function() {
 		<li class="active">Edit Existing Product</li>
 	 </ul>
 	 <form action='' method='get' class='form-horizontal' name='addProductForm'>
-		 	<div class="control-group">
-			    <label class="control-label" for="productName">Product Name:</label>
-			    <div class="controls">
-			      <input type="text" name='productName' id='productName' value='Product A'>
-			    </div>
+	 <div class='row'>
+			<div class='span6'>
+						<div class="control-group">
+							<label class="control-label" for="productName">Product Name:</label>
+							<div class="controls">
+							  <input type="text" name='productName' id='productName' value='Product A'>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="productID">Product ID:</label>
+							<div class="controls">
+							  <input type="number" name='productID' id='productID' value='001'>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="productPRICE">Price:</label>
+							<div class="controls">
+							  <input type="number" id='productPRICE' name='productPRICE' value='39.99'>
+							</div>
+						</div>
+						<div class="control-group">
+							<label class="control-label" for="productURL">URL:</label>
+							<div class="controls">
+							  <input type="url" id='productURL' name='productURL' value='www.example.com/productA'>
+							</div>
+						</div>
+						<div id='productCATEGORY' class='control-group'>
+							<label class="control-label" for="productCAT">Category:</label>
+							<div class="controls">
+								<select id='productCAT' name='productCAT' onchange="if(selectedIndex==2){location = this.options[this.selectedIndex].value; document.location.reload();}">
+									<option value='Red Wine' selected='true'>Red Wine</option>
+									<option value='White Wine'>White Wine</option>
+									<option value='#productManagementADDCATEGORY'>Add New Category</option>
+								 </select>
+							</div>
+						</div>	
+					</div>
+					<div class='span5'>	
+							<div id='productDESCRIPTION'><div>Product Description:</div> <textarea style='height: 115px;' name='productDESCRIPTION'>Blah blah blah blah</textarea></div>
+							<div id='usageDESCRIPTION' style='position: relative; top: 60px;'><div>Usage Description:</div> <textarea style='height: 115px;' name='usageDESCRIPTION'>usage description here</textarea></div>
+					</div>
+					<div class='span4'>					
+							<div class="fileupload fileupload-new" data-provides="fileupload">
+							  <div class="fileupload-new thumbnail" style="width: 345px; height: 270px;"><img style="width: 345px; height: 270px;" src='img/placeholder.jpg' /></div>
+							  <div class="fileupload-preview fileupload-exists thumbnail" style="width: 345px; height: 270px; line-height: 20px;"></div>
+							  <div>
+							   <span name='productTHUMBNAIL' class="btn btn-file" style='width: 330px;'><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" /></span>
+								<a href="#" class="btn fileupload-exists" style='width: 330px;' data-dismiss="fileupload">Remove</a>
+							  </div>
+							</div>
+					</div>
 			</div>
-			<div class="control-group">
-			    <label class="control-label" for="productID">Product ID:</label>
-			    <div class="controls">
-			      <input type="number" name='productID' id='productID' value='001'>
-			    </div>
-			</div>
-			<div class="control-group">
-			    <label class="control-label" for="productPRICE">Price:</label>
-			    <div class="controls">
-			      <input type="number" id='productPRICE' name='productPRICE' value='39.99'>
-			    </div>
-			</div>
-			<div class="control-group">
-			    <label class="control-label" for="productURL">URL:</label>
-			    <div class="controls">
-			      <input type="url" id='productURL' name='productURL' value='www.example.com/productA'>
-			    </div>
-			</div>
-			<div id='productCATEGORY' class='control-group'>
-				<label class="control-label" for="productCAT">Category:</label>
-				<div class="controls">
-					<select id='productCAT' name='productCAT' onchange="if(selectedIndex==2){location = this.options[this.selectedIndex].value; document.location.reload();}">
-						<option value='Red Wine' selected='true'>Red Wine</option>
-						<option value='White Wine'>White Wine</option>
-						<option value='#productManagementADDCATEGORY'>Add New Category</option>
-					 </select>
+			<div class='row'>
+				<div class='span3 offset6'>
+					<input type='submit' value='Edit and Exit' class='btn btn-warning btn-large btn-block' style='position:relative; left: 28px;'/>
 				</div>
-			</div>	
-			
-		 		<div id='productDESCRIPTION'><div>Product Description:</div> <textarea style='height: 115px;' name='productDESCRIPTION'>Blah blah blah blah</textarea></div>
-		 		<div id='usageDESCRIPTION'><div>Usage Description:</div> <textarea style='height: 115px;' name='usageDESCRIPTION'>usage description here</textarea></div>
-		 		<div class="fileupload fileupload-new" data-provides="fileupload">
-				  <div class="fileupload-new thumbnail" style="width: 345px; height: 270px;"><img style="width: 345px; height: 270px;" src='img/placeholder.jpg' /></div>
-				  <div class="fileupload-preview fileupload-exists thumbnail" style="width: 345px; height: 270px; line-height: 20px;"></div>
-				  <div>
-				   <span name='productTHUMBNAIL' class="btn btn-file btn-block"><span class="fileupload-new">Select image</span><span class="fileupload-exists">Change</span><input type="file" /></span>
-					<a href="#" class="btn btn-block fileupload-exists" data-dismiss="fileupload">Remove</a>
-				  </div>
-				</div>
-				
-		 		<input type='submit' id='productsubmit' value='Add and Exit' class='btn btn-warning btn-large' />
+			</div>
 		 		
 	 	</form>
 </div>
@@ -1101,12 +1131,87 @@ $(document).ready(function() {
  
 <!-- Tab - Order/New Order --> 
     <div class="tab-pane" id="newOrder">
-      <p>New Order Section.</p>
-    </div>
+	<ul class="breadcrumb">
+  		<li	class='fakeactive'>Order<span class="divider">/</span></li>
+  		<li class="active">New Order</li> 	
+	 </ul>
+      <h2>Place new order</h2>
+	  <div class='medspace'></div>
+	  <form action="" method='get' name='newOrderForm' class='form-horizontal'>
+		<table class='table table-striped table-bordered table-hover' id='newordertable'>
+			<thead><th></th><th>Product ID</th><th>Tag Type</th><th>Unit Price</th><th>Quantity</th><th>Total Price</th></thead>
+			<tbody>
+				<tr><td><input type='checkbox' value=''></td><td>101</td><td>QR Code</td><td>$ 1.20</td><td>1000</td><td>$ 1200.00</td></tr>
+				<tr><td><input type='checkbox' value=''></td><td>102</td><td>NFC Code</td><td>$ 2.20</td><td>500</td><td>$ 1100.00</td></tr>
+				<tr><td><input type='checkbox' value=''></td><td>103</td><td>NFC Code</td><td>$ 2.20</td><td>2000</td><td>$ 4400.00</td></tr>
+				<tr style='font-weight: bold;'><td>TOTAL</td><td></td><td></td><td></td><td>3500</td><td>$ 7700.00</td></tr>
+			</tbody>
+		</table>
+		
+		<div class='row'>
+			<div class='span5 offset2'>
+					<div class="control-group">
+				<label class="control-label" for="shippingMethod">Shipping Method:</label>
+				<div class="controls">
+				  <select id='shippingMethod' name='shipping'>
+					<option value='FedEx'>FedEx</option>
+					<option value='UPS'>UPS</option>
+					<option value='Purolator'>Purolator</option>
+				  </select>
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label" for="paymentMethod">Payment Method:</label>
+				<div class="controls">
+				  <select id='paymentMethod' name='payment'>
+					<option value='Debit Card'>Debit Card</option>
+					<option value='Credit Card'>Credit Card</option>
+				  </select>
+				</div>
+			  </div>
+			  <div class="control-group">
+				<label class="control-label" for="expectedDate">Expected Date:</label>
+				<div class="controls">
+				  <select id='expectedDate' name='expectedDate'>
+					<option value='One week'>One week</option>
+					<option value='Two weeks'>Two weeks</option>
+					<option value='One month'>One month</option>
+					<option value='Longer than a month'>Longer than a month</option>
+				  </select>
+				</div>
+			  </div>
+			 </div>
+			 <div class='span6'>
+				<div class="control-group">
+				<label class="control-label" for="extraRequests">Extra Requests:</label>
+				<div class="controls">
+					<textarea style='height: 125px;'></textarea>
+					<div class='medspace'></div>
+					<input type='submit' class='btn btn-warning btn-block' value='Place New Order'>
+				</div>
+			 </div> 
+			 </div>
+	</div>
+				  </form>
+				</div>
 	
 <!-- Tab - Order/Previous Order --> 
     <div class="tab-pane" id="previousOrder">
-      <p>Previous Order Section.</p>
+	<ul class="breadcrumb">
+  		<li	class='fakeactive'>Order<span class="divider">/</span></li>
+  		<li class="active">Previous Order</li> 	
+	 </ul>
+      <h2>Previous Order</h2>
+	  <div class='medspace'></div>
+	  <table class='table table-striped table-bordered table-hover' id='previousordertable'>
+		<thead><th>Order ID</th><th>Date</th><th>Tag Quantity</th><th>Total Price</th><th>Payment Status</th><th>Shipping Status</th></thead>
+			<tbody>
+				<tr><td>223</td><td>2013/05/15</td><td>5500</td><td>$ 6500.00</td><td>Paid</td><td>Shipped</td></tr>
+				<tr><td>224</td><td>2013/05/16</td><td>5540</td><td>$ 7500.00</td><td>Paid</td><td>Not Shipped</td></tr>
+				<tr><td>225</td><td>2013/05/18</td><td>3500</td><td>$ 4500.00</td><td>Not Received</td><td>Not Shipped</td></tr>
+			</tbody>
+	  </table>
+	  
     </div>
  
 <!-- Tab - Export --> 

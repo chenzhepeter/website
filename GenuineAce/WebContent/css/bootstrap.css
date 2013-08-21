@@ -6,32 +6,8 @@
  * http://www.apache.org/licenses/LICENSE-2.0
  *
  * Designed and built with all the love in the world @twitter by @mdo and @fat.
- */
-#productsubmit {
-position: absolute;
-top: 425px;
-left: 523px;
-}	
- #categorysubmit{
-	position: relative;
-	top: -195px;
-	left: 397px;
- }
- #categoryDESCRIPTION{
-	position: relative;
-	top: -241px;
-	left: 530px;
-}
-#productDESCRIPTION {
-position: relative;
-top: -402px;
-left: 455px;
-}
-#usageDESCRIPTION {
-position: relative;
-top: -339px;
-left: 455px;
-}
+*/
+
 .fakeactive{
 	color: #999999;
 }
@@ -2179,7 +2155,7 @@ table {
 }
 
 .table {
-  width: 100%;
+  width: 95%;
   margin-bottom: 20px;
 }
 
@@ -2191,6 +2167,7 @@ table {
   vertical-align: top;
   border-top: 1px solid #dddddd;
 }
+
 
 .table th {
   font-weight: bold;
