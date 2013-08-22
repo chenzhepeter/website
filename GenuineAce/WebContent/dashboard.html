@@ -733,7 +733,8 @@ $(function () {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
-            plotShadow: false
+            plotShadow: false,
+			type: 'pie'
         },
         title: {
             text: 'Age Statistics of Users',
@@ -753,7 +754,7 @@ $(function () {
                     enabled: true,
                     color: '#000000',
                     connectorColor: '#000000',
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %'
+                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
                 }
             }
         },
@@ -792,7 +793,8 @@ $(function () {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
-            plotShadow: false
+            plotShadow: false,
+			type: 'pie'
         },
         title: {
             text: 'Gender Statistics of Users',
@@ -848,7 +850,8 @@ $(function () {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
-            plotShadow: false
+            plotShadow: false,
+			type: 'pie'
         },
         title: {
             text: 'Education Statistics of Users',
@@ -911,7 +914,8 @@ $(function () {
         chart: {
             plotBackgroundColor: null,
             plotBorderWidth: null,
-            plotShadow: false
+            plotShadow: false,
+			type: 'pie'
         },
         title: {
             text: 'Occupation Statistics of Users',
@@ -927,8 +931,9 @@ $(function () {
             pie: {
                 allowPointSelect: true,
                 cursor: 'pointer',
+				showInLegend: true,
                 dataLabels: {
-                    enabled: true,
+                    enabled: false,
                     color: '#000000',
                     connectorColor: '#000000',
                     format: '<b>{point.name}</b>: {point.percentage:.1f} %'
@@ -1194,7 +1199,7 @@ $(document).ready(function() {
 					</div>	
 				</div>
 				<div class='span4'>
-		 		<div id='categoryDESCRIPTION'><div>Category Description:</div> <textarea name='productDESCRIPTION' style="height: 160px;"></textarea></div>
+		 		<div id='categoryDESCRIPTION'><div>Category Description:</div> <textarea name='productDESCRIPTION' style="height: 160px; width: 260px;"></textarea></div>
 				</div>
 				</div>
 			<div class='row'>
@@ -1232,7 +1237,10 @@ $(document).ready(function() {
 					<div class="control-group">
 						<label class="control-label" for="productPRICE">Price:</label>
 						<div class="controls">
-						  <input type="number" id='productPRICE' name='productPRICE' >
+							<div class='input-prepend'>
+								<span class='add-on'><b>$</b></span>
+								<input type="number" id='productPRICE' name='productPRICE' style='width: 181px' >
+							</div>
 						</div>
 					</div>
 					<div class="control-group">
@@ -1304,7 +1312,10 @@ $(document).ready(function() {
 						<div class="control-group">
 							<label class="control-label" for="productPRICE">Price:</label>
 							<div class="controls">
-							  <input type="number" id='productPRICE' name='productPRICE' value='39.99'>
+							  <div class='input-prepend'>
+								<span class='add-on'><b>$</b></span>
+								<input type="number" id='productPRICE' name='productPRICE' style='width: 181px' value='39.99' >
+							</div>
 							</div>
 						</div>
 						<div class="control-group">
@@ -1325,8 +1336,8 @@ $(document).ready(function() {
 						</div>	
 					</div>
 					<div class='span5'>	
-							<div id='productDESCRIPTION'><div>Product Description:</div> <textarea style='height: 115px;' name='productDESCRIPTION'>Blah blah blah blah</textarea></div>
-							<div id='usageDESCRIPTION' style='position: relative; top: 60px;'><div>Usage Description:</div> <textarea style='height: 115px;' name='usageDESCRIPTION'>usage description here</textarea></div>
+							<div id='productDESCRIPTION'><div>Product Description:</div> <textarea style='height: 115px; width: 260px' name='productDESCRIPTION'>Blah blah blah blah</textarea></div>
+							<div id='usageDESCRIPTION' style='position: relative; top: 60px;'><div>Usage Description:</div> <textarea style='height: 115px; width: 260px;' name='usageDESCRIPTION'>usage description here</textarea></div>
 					</div>
 					<div class='span4'>					
 							<div class="fileupload fileupload-new" data-provides="fileupload">
@@ -1461,7 +1472,7 @@ $(document).ready(function() {
 	  <table class='table table-bordered table-striped table-hover' >
 		<thead><th>Message ID</th><th>Gender</th><th>Age</th><th>Location</th><th>Platform</th><th># of Recipients</th><th>Status</th></thead>
       		<tbody>	
-      			<tr><td><a href="#" rel='popover' data-toggle='popover' data-content="<a href='#interactionEDIT' data-toggle='tab'>EDIT</a> | <a href='#interactionDELETE' data-toggle='modal'>DELETE</a>" data-html='true' id='message15'>15</a></td><td>Male, Female</td><td>18-24</td><td>All</td><td>App</td><td>174</td><td>Sent</td></tr>
+      			<tr><td><a href="#" rel='popover' data-toggle='popover' data-content="<a href='#interactionEDIT' data-toggle='tab'>EDIT</a> | <a href='#interactionDELETE' data-toggle='modal'>DELETE</a>" data-html='true' id='message15'>15</a></td><td>Male, Female</td><td>18-24</td><td>Beijing, Gansu, Ningzhau</td><td>App</td><td>174</td><td>Sent</td></tr>
       			<tr><td><a href="#" rel='popover' data-toggle='popover' data-content="<a href='#interactionEDIT' data-toggle='tab'>EDIT</a> | <a href='#interactionDELETE' data-toggle='modal'>DELETE</a>" data-html='true' id='message16'>16</a></td><td>Male</td><td>18-24, 25-29</td><td>Beijing</td><td>Facebook</td><td>300</td><td>Sent</td></tr>
       			<tr><td><a href="#" rel='popover' data-toggle='popover' data-content="<a href='#interactionEDIT' data-toggle='tab'>EDIT</a> | <a href='#interactionDELETE' data-toggle='modal'>DELETE</a>" data-html='true' id='message17'>17</a></td><td>Female</td><td>30-39, 40-49, 50+</td><td>Guangzhou, Tianjing</td><td>WeChat, Twitter</td><td>281</td><td>Saved</td></tr>
       			<tr><td><a href="#interactionADD" data-toggle='tab'><i class='icon-plus-sign'></i> Create New Group Message</a></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>
@@ -1474,7 +1485,107 @@ $(document).ready(function() {
 			<li><a href="#interaction" data-toggle='tab'>Interaction</a><span class="divider">/</span></li>
 			<li class="active">Edit Group Message</li>
 		 </ul>
-		<p> interaction edit section. </p>
+		
+		<h2>Edit Group Message </h2>
+		<div class='medspace'></div>
+		
+		<form action='' method='get' class='form-horizontal'>
+			<div class='row'>
+				<div class='span5'>
+					<div class="control-group">
+						<label class="control-label" for="interactGENDER">Gender:</label>
+						<div class="controls">
+						  <select id='interactGENDER' style='height: 50px' name='interactGENDER' multiple>
+							<option value='male' selected>Male</option>
+							<option value='female' selected>Female</option>
+						</select>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="interactAGE">Age Group:</label>
+						<div class="controls">
+						  <select id='interactAGE' name='interactAGE' multiple>
+							<option value='18-24' selected>18-24</option>
+							<option value='25-29'>25-29</option>
+							<option value='30-39'>30-39</option>
+							<option value='40-49'>40-49</option>
+							<option value='50+'>50+</option>
+						</select>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="interactLOCATION">Location:</label>
+						<div class="controls">
+						  <select id='interactLOCATION' name='interactLOCATION' multiple>
+							<option value='Beijing' selected>Beijing</option>
+							<option value='Chengdu'>Chengdu</option>
+							<option value='Chongqing'>Chongqing</option>
+							<option value='Gansu' selected>Gansu</option>
+							<option value='Guangzhou'>Guangzhou</option>
+							<option value='Ningzhau' selected>Ningzhau</option>
+							<option value='Shanghai'>Shanghai</option>
+							<option value='Taiyuan'>Taiyuan</option>
+							<option value='Tianjing'>Tianjing</option>
+							<option value='Wuhan'>Wuhan</option>
+						</select>
+						</div>
+					</div>
+					<div class="control-group">
+						<label class="control-label" for="interactPLATFORM">Platform:</label>
+						<div class="controls">
+						  <select id='interactPLATFORM' name='interactPLATFORM' multiple>
+							<option value='Scan App' selected>Scan App</option>
+							<option value='WeChat'>WeChat</option>
+							<option value='Twitter'>Twitter</option>
+							<option value='Facebook'>Facebook</option>
+							<option value='Email'>Email</option>
+						</select>
+						</div>
+					</div>
+				
+				</div>
+				<div class='span6'>
+					<div class="control-group">
+							<label class="control-label" for="interactTITLE">Message Title:</label>
+							<div class="controls">
+							  <input type="text" style='width: 240px;' name='interactTITLE' id='interactTITLE' value='Message Title Here' >
+							</div>
+					</div>
+					<div class="control-group">
+							<label class="control-label" for="interactDESCRIPTION">Message Description:</label>
+							<div class="controls">
+							  <textarea style='height: 260px; width: 240px;' name='interactDESCRIPTION' id='interactDESCRIPTION'>Message content goes here.</textarea>
+							</div>
+					</div>
+					<div class="control-group">
+							<label class="control-label" for="interactURL">Message URL:</label>
+							<div class="controls">
+							  <input type="text" style='width: 240px;' name='interactURL' id='interactURL' value='www.sampleurl.com/edit' >
+							</div>
+					</div>
+					<div style='position: relative; left: 80px;'> Based on the conditions, the no. of recipients are: <span id='recipientnumber'><b>196</b></span>.</div>
+				</div>
+				<div class='span5'>
+						<div class="fileupload fileupload-new" data-provides="fileupload">
+						  <div class="fileupload-new thumbnail" style="width: 345px; height: 270px;"><img style="width: 345px; height: 270px;" src='img/placeholder.jpg' /></div>
+						  <div class="fileupload-preview fileupload-exists thumbnail" style="width: 345px; height: 270px; line-height: 20px;"></div>
+						  <div>
+							  <span name='productTHUMBNAIL' class="btn btn-file" style='width: 330px;'><span class="fileupload-new">Select Message Picture</span><span class="fileupload-exists">Change</span><input type="file" /></span>
+							  <a href="#" class="btn fileupload-exists" style='width: 330px;' data-dismiss="fileupload">Remove</a>
+					      </div>
+					    </div>
+						<div class='bigspace'></div>
+						<div class='row'>
+							<div class='span2'>
+								<input type='submit' id='interactionSEND' value='SEND' style='position: relative; left: -20px;' class='btn btn-warning btn-block' />
+							</div>
+							<div class='span2'>
+								<button class='btn btn-warning btn-block' style='position: relative; left: 37px;' id='interactionSAVE'>Save and Exit</button>
+							</div>
+						</div>
+				</div>
+			</div>
+	 	</form>
 	 </div>
 	 
 <!--Tab - Interaction/add group message --> 
@@ -1656,7 +1767,7 @@ $(document).ready(function() {
 				<div class="control-group">
 				<label class="control-label" for="extraRequests">Extra Requests:</label>
 				<div class="controls">
-					<textarea style='height: 125px;'></textarea>
+					<textarea style='height: 125px; width: 260px;'></textarea>
 					<div class='medspace'></div>
 					<input type='submit' class='btn btn-warning btn-block' value='Place New Order'>
 				</div>

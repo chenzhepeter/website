@@ -5319,7 +5319,7 @@ left: 35px;
 }
 
 .modal-backdrop {
-  position: fixed;
+  position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
@@ -5370,7 +5370,7 @@ left: 35px;
 }
 
 .modal.fade.in {
-  top: 10%;
+  top: 30%;
 }
 
 .modal-header {
