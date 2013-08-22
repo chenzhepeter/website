@@ -985,9 +985,10 @@ $(function () {
 });
 });
 
-//Warning or no warning.  string.warning[0].error returns either true or false
 $( document ).ready(function() {
+//Enable Popover
 $('#productA, #productB, #productC, #message15, #message16, #message17').popover();
+//Warning or no warning.  string.warning[0].error returns either true or false
 	if(string.warning[0].error)
 		{
 		$("#ok").attr("class", "icon-remove-sign");
@@ -996,15 +997,11 @@ $('#productA, #productB, #productC, #message15, #message16, #message17').popover
 		$("#Warning").css("border", "10px solid red");
 		$("#ok, #ok1, #ok2").css("color", "red");
 		}
-});
-
 //Add hash to url
-$(document).ready(function() {
-    if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
+	if (location.hash !== '') $('a[href="' + location.hash + '"]').tab('show');
     return $('a[data-toggle="tab"]').on('shown', function(e) {
       return location.hash = $(e.target).attr('href').substr(1);
     });
-	document.getElementById("addProductBreadcrumb").innerHTML="<li><a href='#productManagementRED' data-toggle='tab'>Red Wine</a> <span class='divider'>/</span></li><li class='active'>Edit Existing Product</li>";
 });
 </script>
 
@@ -1223,36 +1220,36 @@ $(document).ready(function() {
 		<div class='row'>
 			<div class='span6'>
 					<div class="control-group">
-						<label class="control-label" for="productName">Product Name:</label>
+						<label class="control-label" for="ADDproductNAME">Product Name:</label>
 						<div class="controls">
-						  <input type="text" name='productName' id='productName' >
+						  <input type="text" name='ADDproductNAME' id='ADDproductNAME' >
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label" for="productID">Product ID:</label>
+						<label class="control-label" for="ADDproductID">Product ID:</label>
 						<div class="controls">
-						  <input type="number" name='productID' id='productID' >
+						  <input type="number" name='ADDproductID' id='ADDproductID' >
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label" for="productPRICE">Price:</label>
+						<label class="control-label" for="ADDproductPRICE">Price:</label>
 						<div class="controls">
 							<div class='input-prepend'>
 								<span class='add-on'><b>$</b></span>
-								<input type="number" id='productPRICE' name='productPRICE' style='width: 181px' >
+								<input type="number" id='ADDproductPRICE' name='ADDproductPRICE' style='width: 181px' >
 							</div>
 						</div>
 					</div>
 					<div class="control-group">
-						<label class="control-label" for="productURL">URL:</label>
+						<label class="control-label" for="ADDproductURL">URL:</label>
 						<div class="controls">
-						  <input type="url" id='productURL' name='productURL' >
+						  <input type="url" id='ADDproductURL' name='ADDproductURL' >
 						</div>
 					</div>
 					<div id='productCATEGORY' class='control-group'>
-						<label class="control-label" for="productCAT">Category:</label>
+						<label class="control-label" for="ADDproductCAT">Category:</label>
 						<div class="controls">
-							<select id='productCAT' name='productCAT' onchange="if(selectedIndex==2){location = this.options[this.selectedIndex].value; document.location.reload();}">
+							<select id='ADDproductCAT' name='ADDproductCAT' onchange="if(selectedIndex==2){location = this.options[this.selectedIndex].value; document.location.reload();}">
 								<option value='Red Wine'>Red Wine</option>
 								<option value='White Wine'>White Wine</option>
 								<option value='#productManagementADDCATEGORY'>Add New Category</option>
@@ -1261,8 +1258,8 @@ $(document).ready(function() {
 					</div>
 			</div>
 			<div class='span5'>
-		 		<div id='productDESCRIPTION'><div>Product Description:</div> <textarea style='height: 115px; width: 260px;' name='productDESCRIPTION'></textarea></div>
-		 		<div id='usageDESCRIPTION' style='position: relative; top: 60px;'><div>Usage Description:</div> <textarea style='height: 115px; width: 260px;' name='usageDESCRIPTION'></textarea></div>
+		 		<div id='ADDproductDESCRIPTION'><div>Product Description:</div> <textarea style='height: 115px; width: 260px;' name='productDESCRIPTION'></textarea></div>
+		 		<div id='ADDusageDESCRIPTION' style='position: relative; top: 60px;'><div>Usage Description:</div> <textarea style='height: 115px; width: 260px;' name='usageDESCRIPTION'></textarea></div>
 			</div>
 			<div class='span4'>
 		 		<div class="fileupload fileupload-new" data-provides="fileupload">
@@ -1298,36 +1295,36 @@ $(document).ready(function() {
 	 <div class='row'>
 			<div class='span6'>
 						<div class="control-group">
-							<label class="control-label" for="productName">Product Name:</label>
+							<label class="control-label" for="EDITproductNAME">Product Name:</label>
 							<div class="controls">
-							  <input type="text" name='productName' id='productName' value='Product A'>
+							  <input type="text" name='EDITproductNAME' id='EDITproductNAME' value='Product A'>
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label" for="productID">Product ID:</label>
+							<label class="control-label" for="EDITproductID">Product ID:</label>
 							<div class="controls">
-							  <input type="number" name='productID' id='productID' value='001'>
+							  <input type="number" name='EDITproductID' id='EDITproductID' value='001'>
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label" for="productPRICE">Price:</label>
+							<label class="control-label" for="EDITproductPRICE">Price:</label>
 							<div class="controls">
 							  <div class='input-prepend'>
 								<span class='add-on'><b>$</b></span>
-								<input type="number" id='productPRICE' name='productPRICE' style='width: 181px' value='39.99' >
+								<input type="number" id='EDITproductPRICE' name='EDITproductPRICE' style='width: 181px' value='39.99' >
 							</div>
 							</div>
 						</div>
 						<div class="control-group">
-							<label class="control-label" for="productURL">URL:</label>
+							<label class="control-label" for="EDITproductURL">URL:</label>
 							<div class="controls">
-							  <input type="url" id='productURL' name='productURL' value='www.example.com/productA'>
+							  <input type="url" id='EDITproductURL' name='EDITproductURL' value='www.example.com/productA'>
 							</div>
 						</div>
 						<div id='productCATEGORY' class='control-group'>
-							<label class="control-label" for="productCAT">Category:</label>
+							<label class="control-label" for="EDITproductCAT">Category:</label>
 							<div class="controls">
-								<select id='productCAT' name='productCAT' onchange="if(selectedIndex==2){location = this.options[this.selectedIndex].value; document.location.reload();}">
+								<select id='EDITproductCAT' name='EDITproductCAT' onchange="if(selectedIndex==2){location = this.options[this.selectedIndex].value; document.location.reload();}">
 									<option value='Red Wine' selected='true'>Red Wine</option>
 									<option value='White Wine'>White Wine</option>
 									<option value='#productManagementADDCATEGORY'>Add New Category</option>
@@ -1336,8 +1333,8 @@ $(document).ready(function() {
 						</div>	
 					</div>
 					<div class='span5'>	
-							<div id='productDESCRIPTION'><div>Product Description:</div> <textarea style='height: 115px; width: 260px' name='productDESCRIPTION'>Blah blah blah blah</textarea></div>
-							<div id='usageDESCRIPTION' style='position: relative; top: 60px;'><div>Usage Description:</div> <textarea style='height: 115px; width: 260px;' name='usageDESCRIPTION'>usage description here</textarea></div>
+							<div id='EDITproductDESCRIPTION'><div>Product Description:</div> <textarea style='height: 115px; width: 260px' name='productDESCRIPTION'>Blah blah blah blah</textarea></div>
+							<div id='EDITusageDESCRIPTION' style='position: relative; top: 60px;'><div>Usage Description:</div> <textarea style='height: 115px; width: 260px;' name='usageDESCRIPTION'>usage description here</textarea></div>
 					</div>
 					<div class='span4'>					
 							<div class="fileupload fileupload-new" data-provides="fileupload">
@@ -1405,7 +1402,7 @@ $(document).ready(function() {
 	  <div class='row'>
 		<div class='span8'>
 				  <div class="control-group">
-						<label class="control-label" for="age">Age Group:</label>
+						<label class="control-label" for="age">Age Group - Select Product:</label>
 						<div class="controls">
 						  <select id='age'>
 							<option value='All'>All</option>
@@ -1419,7 +1416,7 @@ $(document).ready(function() {
 		</div>
 		<div class='span8'>
 				  <div class="control-group">
-						<label class="control-label" for="gender">Gender:</label>
+						<label class="control-label" for="gender">Gender - Select Product:</label>
 						<div class="controls">
 						  <select id='gender'>
 							<option value='All'>All</option>
@@ -1435,7 +1432,7 @@ $(document).ready(function() {
 	 <div class='row'>
 		<div class='span8'>
 				  <div class="control-group">
-						<label class="control-label" for="education">Education Level:</label>
+						<label class="control-label" for="education">Education Level - Select Product:</label>
 						<div class="controls">
 						  <select id='education'>
 							<option value='All'>All</option>
@@ -1449,7 +1446,7 @@ $(document).ready(function() {
 		</div>
 		<div class='span8'>
 				  <div class="control-group">
-						<label class="control-label" for="occupation">Occupation:</label>
+						<label class="control-label" for="occupation">Occupation - Select Product:</label>
 						<div class="controls">
 						  <select id='occupation'>
 							<option value='All'>All</option>
@@ -1671,7 +1668,7 @@ $(document).ready(function() {
 							  <input type="text" style='width: 240px;' name='interactURL' id='interactURL' >
 							</div>
 					</div>
-					<div style='position: relative; left: 80px;'> Based on the conditions, the no. of recipients are: <span id='recipientnumber'><b>196</b></span>.</div>
+					<div style='position: relative; left: 80px;'> Based on the conditions, the no. of recipients are: <span id='recipientnumber'><b></b></span>.</div>
 				</div>
 				<div class='span5'>
 						<div class="fileupload fileupload-new" data-provides="fileupload">
