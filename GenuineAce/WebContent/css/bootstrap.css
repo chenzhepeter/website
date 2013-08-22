@@ -116,11 +116,6 @@ left: 237px;
 .bigspace {
 	height: 45px;
 }
-
-textarea {
-	min-width: 260px;
-	max-width: 260px;
-}
  
 input[type="text"] {
 	width: 210px;
